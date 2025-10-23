@@ -1,18 +1,13 @@
-# Exported from Render on 2025-10-23T15:30:52Z
+# Exported from Render — Clean .NET Deployment Config
 version: "1"
+
 services:
-- type: web
-  name: Business
-  runtime: node
-  repo: https://github.com/shinadev/Business
-  plan: free
-  envVars:
-  - key: Value
-    sync: false
-  - key: Name
-    sync: false
-  region: oregon
-  buildCommand: dotnet publish -c Release -o out
-  startCommand: dotnet out/Business.dll
-  autoDeployTrigger: commit
-  rootDir: Business
+  - type: web
+    name: business
+    env: docker
+    plan: free
+    region: oregon
+    branch: master
+    rootDir: .
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
