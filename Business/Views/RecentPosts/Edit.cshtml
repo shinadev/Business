@@ -1,0 +1,91 @@
+﻿@model Business.Models.Blog.RecentPost
+
+@{
+    ViewData["Title"] = "Edit Recent Post";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-warning text-dark">
+            <h3 class="mb-0">Edit Recent Post</h3>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit" enctype="multipart/form-data">
+                <input type="hidden" asp-for="Id" />
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <!-- Title -->
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label fw-bold"></label>
+                    <input asp-for="Title" class="form-control" placeholder="Enter title" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <!-- Image Upload -->
+                <div class="mb-3">
+                    <label asp-for="ImageFile" class="form-label fw-bold">Upload Image</label>
+                    <input asp-for="ImageFile" type="file" class="form-control" id="ImageFile" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>
+
+                <!-- Image Preview -->
+                <div class="mb-3 text-center">
+                    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                    {
+                        <img id="preview" src="@Model.ImageUrl" class="img-thumbnail" style="max-width:150px;" />
+                    }
+                    else
+                    {
+                        <img id="preview" class="img-thumbnail" style="max-width:150px; display:none;" />
+                    }
+                </div>
+
+                <!-- Link -->
+                <div class="mb-3">
+                    <label asp-for="Link" class="form-label fw-bold"></label>
+                    <input asp-for="Link" class="form-control" placeholder="Enter link" />
+                    <span asp-validation-for="Link" class="text-danger"></span>
+                </div>
+
+                <!-- Blog Selection -->
+                <div class="mb-3">
+                    <label asp-for="BlogDetailId" class="form-label fw-bold"></label>
+                    <select asp-for="BlogDetailId" class="form-select" asp-items="ViewBag.BlogDetailId">
+                        <option value="">-- Select Blog --</option>
+                    </select>
+                    <span asp-validation-for="BlogDetailId" class="text-danger"></span>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex gap-2">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const input = document.getElementById('ImageFile');
+        const preview = document.getElementById('preview');
+
+        input.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function () {
+                    preview.setAttribute('src', reader.result);
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,95 @@
+﻿@model Business.Models.Contact.ContactHeader
+
+@{
+    ViewData["Title"] = "Edit Contact Header";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-0 rounded-3">
+        <div class="card-header bg-warning text-dark">
+            <h4 class="mb-0">✏️ Edit Contact Header</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label fw-bold"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="BreadcrumbHomeText" class="form-label fw-bold"></label>
+                    <input asp-for="BreadcrumbHomeText" class="form-control" />
+                    <span asp-validation-for="BreadcrumbHomeText" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="BreadcrumbHomeUrl" class="form-label fw-bold"></label>
+                    <input asp-for="BreadcrumbHomeUrl" class="form-control" />
+                    <span asp-validation-for="BreadcrumbHomeUrl" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="BreadcrumbCurrentText" class="form-label fw-bold"></label>
+                    <input asp-for="BreadcrumbCurrentText" class="form-control" />
+                    <span asp-validation-for="BreadcrumbCurrentText" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="BreadcrumbCurrentUrl" class="form-label fw-bold"></label>
+                    <input asp-for="BreadcrumbCurrentUrl" class="form-control" />
+                    <span asp-validation-for="BreadcrumbCurrentUrl" class="text-danger"></span>
+                </div>
+
+                <!-- Image Upload & Preview -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Header Image</label>
+                    <div class="mb-2">
+                        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                        {
+                            <img src="@Model.ImageUrl" alt="Current Image" class="img-thumbnail shadow-sm" style="max-height: 200px;" id="currentImage" />
+                        }
+                        else
+                        {
+                            <span class="text-muted">No image uploaded</span>
+                        }
+                    </div>
+                    <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" onchange="previewImage(event)" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+
+                    <!-- Live Preview -->
+                    <div class="mt-2">
+                        <img id="preview" class="img-thumbnail shadow-sm d-none" style="max-height:200px;" />
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to List
+                    </a>
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-save"></i> Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        function previewImage(event) {
+            var preview = document.getElementById('preview');
+            preview.src = URL.createObjectURL(event.target.files[0]);
+            preview.classList.remove('d-none');
+        }
+    </script>
+}

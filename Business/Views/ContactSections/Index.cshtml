@@ -1,0 +1,145 @@
+﻿@model IEnumerable<Business.Models.Contact.ContactSection>
+
+@{
+    ViewData["Title"] = "Contact Sections";
+    Layout = "~/Views/Shared/Admin.cshtml";
+    var hasItems = Model != null && Model.Any();
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-header bg-primary text-white d-flex align-items-center justify-content-between">
+                    <h3 class="mb-0 d-flex align-items-center gap-2">
+                        <i class="bi bi-collection"></i> Contact Sections
+                        <span class="badge bg-light text-primary">@Model?.Count() ?? 0</span>
+                    </h3>
+                    <a asp-action="Create" class="btn btn-light">
+                        <i class="bi bi-plus-circle"></i> Create New
+                    </a>
+                </div>
+
+                <div class="card-body">
+                    <div class="row g-2 align-items-center mb-3">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-search"></i></span>
+                                <input id="tableSearch" type="text" class="form-control" placeholder="Search by title, phone, email, address..." />
+                                <button id="clearSearch" type="button" class="btn btn-outline-secondary"><i class="bi bi-x-circle"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (!hasItems)
+                    {
+                        <div class="text-center py-5">
+                            <div class="display-6 mb-2"><i class="bi bi-inbox"></i></div>
+                            <p class="text-muted mb-3">No contact sections yet.</p>
+                            <a asp-action="Create" class="btn btn-primary">
+                                <i class="bi bi-plus-circle"></i> Create your first one
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="table-responsive">
+                            <table id="contactTable" class="table table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>@Html.DisplayNameFor(m => m.First().SmallTitle)</th>
+                                        <th>@Html.DisplayNameFor(m => m.First().MainTitle)</th>
+                                        <th class="d-none d-lg-table-cell">@Html.DisplayNameFor(m => m.First().PhoneNumber)</th>
+                                        <th class="d-none d-lg-table-cell">@Html.DisplayNameFor(m => m.First().EmailAddress)</th>
+                                        <th class="d-none d-xl-table-cell">@Html.DisplayNameFor(m => m.First().OfficeAddress)</th>
+                                        <th class="d-none d-xxl-table-cell">@Html.DisplayNameFor(m => m.First().ButtonText)</th>
+                                        <th>Map</th>
+                                        <th class="text-end">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.SmallTitle</td>
+                                            <td>@item.MainTitle</td>
+                                            <td class="d-none d-lg-table-cell">
+                                                @if (!string.IsNullOrWhiteSpace(item.PhoneNumber))
+                                                {
+                                                    <a href="tel:@item.PhoneNumber" class="text-decoration-none">@item.PhoneNumber</a>
+                                                }
+                                            </td>
+                                            <td class="d-none d-lg-table-cell">
+                                                @if (!string.IsNullOrWhiteSpace(item.EmailAddress))
+                                                {
+                                                    <a href="mailto:@item.EmailAddress" class="text-decoration-none">@item.EmailAddress</a>
+                                                }
+                                            </td>
+                                            <td class="d-none d-xl-table-cell">
+                                                <div class="text-truncate" style="max-width: 260px;" title="@item.OfficeAddress">
+                                                    @item.OfficeAddress
+                                                </div>
+                                            </td>
+                                            <td class="d-none d-xxl-table-cell">@item.ButtonText</td>
+                                            <td>
+                                                @if (!string.IsNullOrWhiteSpace(item.MapUrl))
+                                                {
+                                                    <a href="@item.MapUrl" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary">
+                                                        <i class="bi bi-geo-alt"></i> View
+                                                    </a>
+                                                }
+                                            </td>
+                                            <td class="text-end">
+                                                <div class="btn-group" role="group">
+                                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">
+                                                        <i class="bi bi-info-circle"></i>
+                                                    </a>
+                                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-warning">
+                                                        <i class="bi bi-pencil-square"></i>
+                                                    </a>
+                                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">
+                                                        <i class="bi bi-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            const input = document.getElementById('tableSearch');
+            const clearBtn = document.getElementById('clearSearch');
+            const rows = document.querySelectorAll('#contactTable tbody tr');
+
+            function filter() {
+                const q = (input.value || '').toLowerCase();
+                rows.forEach(tr => {
+                    const text = tr.innerText.toLowerCase();
+                    tr.style.display = text.includes(q) ? '' : 'none';
+                });
+            }
+
+            if (input) {
+                input.addEventListener('input', filter);
+            }
+            if (clearBtn) {
+                clearBtn.addEventListener('click', () => { input.value = ''; filter(); input.focus(); });
+            }
+
+            // enable bootstrap tooltips if available
+            if (window.bootstrap) {
+                document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => new bootstrap.Tooltip(el));
+            }
+        })();
+    </script>
+}

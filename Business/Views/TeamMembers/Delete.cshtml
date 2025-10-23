@@ -1,0 +1,59 @@
+﻿@model Business.Models.Team.TeamMember
+
+@{
+    ViewData["Title"] = "Delete Team Member";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="text-danger mb-3">Delete Team Member</h2>
+    <hr />
+
+    <div class="alert alert-warning">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        Are you sure you want to delete <strong>@Model.FullName</strong>?
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">Full Name</dt>
+                <dd class="col-sm-8">@Model.FullName</dd>
+
+                <dt class="col-sm-4">Designation</dt>
+                <dd class="col-sm-8">@Model.Designation</dd>
+
+                <dt class="col-sm-4">Profile Image</dt>
+                <dd class="col-sm-8">
+                    @if (!string.IsNullOrEmpty(Model.ImagePath))
+                    {
+                        <img src="@Url.Content(Model.ImagePath)" class="img-thumbnail" style="max-width: 150px;" alt="@Model.FullName" />
+                    }
+                    else
+                    {
+                        <span class="text-muted">No image uploaded</span>
+                    }
+                </dd>
+
+                <dt class="col-sm-4">Twitter</dt>
+                <dd class="col-sm-8">@Model.TwitterUrl</dd>
+
+                <dt class="col-sm-4">Facebook</dt>
+                <dd class="col-sm-8">@Model.FacebookUrl</dd>
+
+                <dt class="col-sm-4">Instagram</dt>
+                <dd class="col-sm-8">@Model.InstagramUrl</dd>
+
+                <dt class="col-sm-4">LinkedIn</dt>
+                <dd class="col-sm-8">@Model.LinkedInUrl</dd>
+            </dl>
+        </div>
+    </div>
+
+    <form asp-action="DeleteMember" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Edit" asp-route-id="@Model.TeamSectionId" class="btn btn-secondary">Cancel</a>
+    </form>
+
+</div>

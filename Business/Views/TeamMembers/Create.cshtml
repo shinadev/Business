@@ -1,0 +1,100 @@
+﻿@model Business.Models.Team.TeamMember
+
+@{
+    ViewData["Title"] = "Create Team Member";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-3">Add New Team Member</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                <!-- Full Name -->
+                <div class="mb-3">
+                    <label asp-for="FullName" class="form-label"></label>
+                    <input asp-for="FullName" class="form-control" placeholder="Enter full name" />
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+
+                <!-- Designation -->
+                <div class="mb-3">
+                    <label asp-for="Designation" class="form-label"></label>
+                    <input asp-for="Designation" class="form-control" placeholder="Enter designation" />
+                    <span asp-validation-for="Designation" class="text-danger"></span>
+                </div>
+
+                <!-- Team Section Dropdown -->
+                <div class="mb-3">
+                    <label asp-for="TeamSectionId" class="form-label">Team Section</label>
+                    <select asp-for="TeamSectionId" class="form-control" asp-items="@(new SelectList(ViewData["TeamSections"] as List<Business.Models.Team.TeamSection>, "Id", "SectionTitle"))">
+                        <option value="">Select Section</option>
+                    </select>
+                    <span asp-validation-for="TeamSectionId" class="text-danger"></span>
+                </div>
+
+                <!-- Image Upload -->
+                <div class="mb-3">
+                    <label asp-for="ImageFile" class="form-label">Profile Image</label>
+                    <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" onchange="previewImage(event)" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                    <img id="imgPreview" src="#" alt="Preview" class="img-thumbnail mt-2" style="max-width:150px; display:none;" />
+                </div>
+
+                <!-- Social Links -->
+                <div class="mb-3">
+                    <label asp-for="TwitterUrl" class="form-label">Twitter URL</label>
+                    <input asp-for="TwitterUrl" class="form-control" placeholder="https://twitter.com/username" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="FacebookUrl" class="form-label">Facebook URL</label>
+                    <input asp-for="FacebookUrl" class="form-control" placeholder="https://facebook.com/username" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="InstagramUrl" class="form-label">Instagram URL</label>
+                    <input asp-for="InstagramUrl" class="form-control" placeholder="https://instagram.com/username" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="LinkedInUrl" class="form-label">LinkedIn URL</label>
+                    <input asp-for="LinkedInUrl" class="form-control" placeholder="https://linkedin.com/in/username" />
+                </div>
+
+                <!-- Submit Buttons -->
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-1"></i> Create
+                </button>
+                <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        function previewImage(event) {
+            const input = event.target;
+            const preview = document.getElementById('imgPreview');
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                preview.src = '#';
+                preview.style.display = 'none';
+            }
+        }
+    </script>
+}

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Business.Models.Vendor.Vendors>
+
+@{
+    ViewData["Title"] = "Vendors";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3">Vendors</h1>
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> Create New
+    </a>
+</div>
+
+<table class="table table-bordered table-striped table-hover align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>Image</th>
+            <th>Alt Text</th>
+            <th>Link</th>
+            <th style="width: 200px;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.ImagePath))
+                    {
+                        <img src="@item.ImagePath" alt="@item.AltText" class="img-thumbnail" style="max-width: 100px;" />
+                    }
+                    else
+                    {
+                        <span class="text-muted fst-italic">No image</span>
+                    }
+                </td>
+                <td>@item.AltText</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.Link))
+                    {
+                        <a href="@item.Link" target="_blank">@item.Link</a>
+                    }
+                    else
+                    {
+                        <span class="text-muted fst-italic">No link</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm me-1">
+                        <i class="bi bi-pencil-square"></i> Edit
+                    </a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm me-1">
+                        <i class="bi bi-info-circle"></i> Details
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">
+                        <i class="bi bi-trash-fill"></i> Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

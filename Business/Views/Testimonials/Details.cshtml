@@ -1,0 +1,41 @@
+﻿@model Business.Models.Testimonial.Testimonials
+
+@{
+    ViewData["Title"] = "Testimonial Details";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container mt-4">
+    <h2>Testimonial Details</h2>
+    <hr />
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-3">Client Name</dt>
+                <dd class="col-sm-9">@Model.ClientName</dd>
+
+                <dt class="col-sm-3">Profession</dt>
+                <dd class="col-sm-9">@Model.Profession</dd>
+
+                <dt class="col-sm-3">Quote</dt>
+                <dd class="col-sm-9">@Model.Quote</dd>
+
+                <dt class="col-sm-3">Image</dt>
+                <dd class="col-sm-9">
+                    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                    {
+                        <img src="@Model.ImageUrl" alt="Client Image" class="img-thumbnail" style="max-width: 200px;" />
+                    }
+                    else
+                    {
+                        <span class="text-muted">No image uploaded</span>
+                    }
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

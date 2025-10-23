@@ -1,0 +1,123 @@
+﻿@model Business.Models.About.AboutSection
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1>Create About Section</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <!-- Subtitle -->
+            <div class="mb-3">
+                <label asp-for="Subtitle" class="form-label"></label>
+                <input asp-for="Subtitle" class="form-control" />
+                <span asp-validation-for="Subtitle" class="text-danger"></span>
+            </div>
+
+            <!-- Title -->
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <!-- Features 1-4 -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Feature1" class="form-label"></label>
+                    <input asp-for="Feature1" class="form-control" />
+                    <span asp-validation-for="Feature1" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Feature2" class="form-label"></label>
+                    <input asp-for="Feature2" class="form-control" />
+                    <span asp-validation-for="Feature2" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Feature3" class="form-label"></label>
+                    <input asp-for="Feature3" class="form-control" />
+                    <span asp-validation-for="Feature3" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Feature4" class="form-label"></label>
+                    <input asp-for="Feature4" class="form-control" />
+                    <span asp-validation-for="Feature4" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Contact Text -->
+            <div class="mb-3">
+                <label asp-for="ContactText" class="form-label"></label>
+                <input asp-for="ContactText" class="form-control" />
+                <span asp-validation-for="ContactText" class="text-danger"></span>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="mb-3">
+                <label asp-for="PhoneNumber" class="form-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <!-- Quote Button Text -->
+            <div class="mb-3">
+                <label asp-for="QuoteButtonText" class="form-label"></label>
+                <input asp-for="QuoteButtonText" class="form-control" />
+                <span asp-validation-for="QuoteButtonText" class="text-danger"></span>
+            </div>
+
+            <!-- Quote Button URL -->
+            <div class="mb-3">
+                <label asp-for="QuoteButtonUrl" class="form-label"></label>
+                <input asp-for="QuoteButtonUrl" class="form-control" />
+                <span asp-validation-for="QuoteButtonUrl" class="text-danger"></span>
+            </div>
+
+            <!-- Image Upload -->
+            <div class="mb-3">
+                <label asp-for="ImageFile" class="form-label">Upload Image</label>
+                <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" onchange="previewImage(event)" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+
+            <!-- Image Preview -->
+            <div class="mb-3">
+                <img id="imagePreview" src="#" alt="Image Preview" class="img-thumbnail" style="max-height: 250px; display:none;" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create</button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                const output = document.getElementById('imagePreview');
+                output.src = reader.result;
+                output.style.display = 'block';
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+}

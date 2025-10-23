@@ -1,0 +1,81 @@
+﻿@model Business.Models.Menu.NavMenu
+
+@{
+    ViewData["Title"] = "Create Menu";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container-fluid mt-4">
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Create New Menu</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                <div class="mb-3">
+                    <label asp-for="MenuName" class="form-label"></label>
+                    <input asp-for="MenuName" class="form-control" />
+                    <span asp-validation-for="MenuName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Controller" class="form-label"></label>
+                    <input asp-for="Controller" class="form-control" />
+                    <span asp-validation-for="Controller" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Action" class="form-label"></label>
+                    <input asp-for="Action" class="form-control" />
+                    <span asp-validation-for="Action" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="RouteId" class="form-label"></label>
+                    <input asp-for="RouteId" class="form-control" />
+                    <span asp-validation-for="RouteId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="RouteSlug" class="form-label"></label>
+                    <input asp-for="RouteSlug" class="form-control" />
+                    <span asp-validation-for="RouteSlug" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="DropdownGroup" class="form-label"></label>
+                    <input asp-for="DropdownGroup" class="form-control" />
+                    <span asp-validation-for="DropdownGroup" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Order" class="form-label"></label>
+                    <input asp-for="Order" class="form-control" />
+                    <span asp-validation-for="Order" class="text-danger"></span>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input class="form-check-input" asp-for="IsButton" />
+                    <label class="form-check-label" asp-for="IsButton"></label>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save"></i> Create
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to List
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

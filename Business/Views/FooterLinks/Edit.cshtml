@@ -1,0 +1,62 @@
+﻿@model Business.Models.Menu.FooterLink
+
+@{
+    ViewData["Title"] = "Edit Footer Link";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1 class="mb-4">Edit Footer Link</h1>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title mb-4">Edit Footer Link Details</h5>
+                <form asp-action="Edit" novalidate>
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="mb-3">
+                        <label asp-for="Title" class="form-label"></label>
+                        <input asp-for="Title" class="form-control" placeholder="Enter link title" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Url" class="form-label"></label>
+                        <input asp-for="Url" class="form-control" placeholder="Enter URL" />
+                        <span asp-validation-for="Url" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="LinkType" class="form-label"></label>
+                        <select asp-for="LinkType" class="form-select" asp-items="ViewBag.LinkType">
+                            <option value="">-- Select Link Type --</option>
+                        </select>
+                        <span asp-validation-for="LinkType" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="FooterMenuId" class="form-label"></label>
+                        <select asp-for="FooterMenuId" class="form-select" asp-items="ViewBag.FooterMenuId">
+                            <option value="">-- Select Footer Menu --</option>
+                        </select>
+                        <span asp-validation-for="FooterMenuId" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="mt-3 text-center">
+            <a asp-action="Index" class="btn btn-link">Back to List</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

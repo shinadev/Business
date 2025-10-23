@@ -1,0 +1,65 @@
+﻿@model Business.ViewModels.ServiceSectionViewModel
+
+@{
+    ViewData["Title"] = "Edit Service Section";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow rounded-3">
+        <div class="card-header bg-warning text-dark">
+            <h4><i class="bi bi-pencil-square"></i> Edit Service Section</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit" method="post">
+                <input type="hidden" asp-for="ServiceSection.Id" />
+
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="mb-3">
+                    <label asp-for="ServiceSection.SmallTitle" class="form-label fw-bold"></label>
+                    <input asp-for="ServiceSection.SmallTitle" class="form-control" />
+                    <span asp-validation-for="ServiceSection.SmallTitle" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ServiceSection.MainTitle" class="form-label fw-bold"></label>
+                    <input asp-for="ServiceSection.MainTitle" class="form-control" />
+                    <span asp-validation-for="ServiceSection.MainTitle" class="text-danger"></span>
+                </div>
+
+                <hr />
+                <h5>Optional Call To Action</h5>
+
+                <div class="mb-3">
+                    <label asp-for="CallToAction.Title" class="form-label fw-bold"></label>
+                    <input asp-for="CallToAction.Title" class="form-control" placeholder="Enter CTA title" />
+                    <span asp-validation-for="CallToAction.Title" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="CallToAction.Description" class="form-label fw-bold"></label>
+                    <textarea asp-for="CallToAction.Description" class="form-control" rows="3" placeholder="Enter CTA description"></textarea>
+                    <span asp-validation-for="CallToAction.Description" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="CallToAction.PhoneNumber" class="form-label fw-bold"></label>
+                    <input asp-for="CallToAction.PhoneNumber" class="form-control" placeholder="+012 345 6789" />
+                    <span asp-validation-for="CallToAction.PhoneNumber" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-action="Index" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Back</a>
+                    <button type="submit" class="btn btn-success"><i class="bi bi-save"></i> Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,61 @@
+﻿@model Business.ViewModels.TestimonialIndexViewModel
+
+@{
+    ViewData["Title"] = "Testimonials";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-3">Testimonials</h2>
+    <hr />
+
+    <div class="mb-3">
+        <a asp-action="Create" class="btn btn-primary">Add New Testimonial</a>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Client Name</th>
+                <th>Profession</th>
+                <th>Section</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Testimonials != null && Model.Testimonials.Any())
+            {
+                int index = 1;
+                foreach (var testimonial in Model.Testimonials)
+                {
+                    <tr>
+                        <td>@index</td>
+                        <td>@testimonial.ClientName</td>
+                        <td>@testimonial.Profession</td>
+                        <td>@testimonial.TestimonialSection?.SectionTitle</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(testimonial.ImageUrl))
+                            {
+                                <img src="@testimonial.ImageUrl" alt="Client Image" style="max-width:80px; height:auto;" />
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@testimonial.Id" class="btn btn-info btn-sm">View</a>
+                            <a asp-action="Edit" asp-route-id="@testimonial.Id" class="btn btn-warning btn-sm">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@testimonial.Id" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                    index++;
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" class="text-center text-muted">No testimonials available.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

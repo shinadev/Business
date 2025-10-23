@@ -1,0 +1,68 @@
+﻿@model Business.Models.About.AboutHeader
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>About Header</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BreadcrumbHomeText)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BreadcrumbHomeText)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BreadcrumbHomeUrl)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BreadcrumbHomeUrl)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BreadcrumbCurrentText)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BreadcrumbCurrentText)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BreadcrumbCurrentUrl)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BreadcrumbCurrentUrl)
+        </dd>
+
+        <dt class="col-sm-2">
+            Image
+        </dt>
+        <dd class="col-sm-10">
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <img src="@Url.Content(Model.ImageUrl)" alt="Header Image" class="img-fluid rounded border" style="max-height:200px;" />
+            }
+            else
+            {
+                <span>No image available</span>
+            }
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

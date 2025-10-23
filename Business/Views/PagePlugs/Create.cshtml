@@ -1,0 +1,62 @@
+﻿@model Business.Models.Page.PagePlug
+
+@{
+    ViewData["Title"] = "Create Page Plug";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Create" method="post" novalidate>
+    @Html.AntiForgeryToken()
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Content" class="form-label"></label>
+        <textarea asp-for="Content" class="form-control" rows="5"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+
+    <div class="mb-4">
+        <label asp-for="DynamicPageId" class="form-label"></label>
+        <select asp-for="DynamicPageId" class="form-select" asp-items="ViewBag.DynamicPageId">
+            <option value="">-- Select Page --</option>
+        </select>
+        <span asp-validation-for="DynamicPageId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+</form>
+@if (ViewBag.ModelErrors != null)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewBag.ModelErrors)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

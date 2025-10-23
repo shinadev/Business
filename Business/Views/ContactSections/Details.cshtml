@@ -1,0 +1,71 @@
+﻿@model Business.Models.Contact.ContactSection
+
+@{
+    ViewData["Title"] = "Contact Section Details";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-header bg-info text-white text-center py-3">
+                    <h3 class="mb-0"><i class="bi bi-info-circle"></i> Contact Section Details</h3>
+                </div>
+                <div class="card-body p-4">
+                    <dl class="row">
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.SmallTitle)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.SmallTitle)</dd>
+
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.MainTitle)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.MainTitle)</dd>
+
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.PhoneTitle)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.PhoneTitle)</dd>
+
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.PhoneNumber)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.PhoneNumber)</dd>
+
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.EmailTitle)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.EmailTitle)</dd>
+
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.EmailAddress)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.EmailAddress)</dd>
+
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.OfficeTitle)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.OfficeTitle)</dd>
+
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.OfficeAddress)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.OfficeAddress)</dd>
+
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.NamePlaceholder)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.NamePlaceholder)</dd>
+
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.EmailPlaceholder)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.EmailPlaceholder)</dd>
+
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.SubjectPlaceholder)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.SubjectPlaceholder)</dd>
+
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.MessagePlaceholder)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.MessagePlaceholder)</dd>
+
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.ButtonText)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.ButtonText)</dd>
+
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.MapUrl)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.MapUrl)</dd>
+                    </dl>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to List
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                        <i class="bi bi-pencil-square"></i> Edit
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

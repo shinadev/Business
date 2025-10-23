@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Business.Models.Blog.Comment>
+
+@{
+    ViewData["Title"] = "Comments";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between mb-3">
+        <h2>Comments</h2>
+        <a asp-action="Create" class="btn btn-success">Create New</a>
+    </div>
+
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Author Name</th>
+                <th>Author Image</th>
+                <th>Date</th>
+                <th>Content</th>
+                <th>Is Reply?</th>
+                <th>Blog Title</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.AuthorName</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.AuthorImageUrl))
+                        {
+                            <img src="@item.AuthorImageUrl" class="img-thumbnail" style="max-width:80px;" />
+                        }
+                    </td>
+                    <td>@item.Date.ToString("yyyy-MM-dd")</td>
+                    <td>@item.Content</td>
+                    <td>@(item.IsReply ? "Yes" : "No")</td>
+                    <td>@item.BlogDetail?.Title</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info text-white">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

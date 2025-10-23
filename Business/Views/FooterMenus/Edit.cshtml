@@ -1,0 +1,90 @@
+﻿@model Business.Models.Menu.FooterMenu
+
+@{
+    ViewData["Title"] = "Edit Footer Menu";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Edit Footer Menu</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a asp-action="Index">Footer Menus</a></li>
+        <li class="breadcrumb-item active">Edit</li>
+    </ol>
+
+    <div class="card shadow rounded-3">
+        <div class="card-header bg-primary text-white">
+            <i class="fas fa-edit me-2"></i> Edit Footer Menu Details
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label asp-for="AboutTitle" class="form-label">About Title</label>
+                        <input asp-for="AboutTitle" class="form-control" />
+                        <span asp-validation-for="AboutTitle" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="AboutContent" class="form-label">About Content</label>
+                        <input asp-for="AboutContent" class="form-control" />
+                        <span asp-validation-for="AboutContent" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Address" class="form-label">Address</label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Email" class="form-label">Email</label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Phone" class="form-label">Phone</label>
+                        <input asp-for="Phone" class="form-control" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Copyright" class="form-label">Copyright</label>
+                        <input asp-for="Copyright" class="form-control" />
+                        <span asp-validation-for="Copyright" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="AttributionText" class="form-label">Attribution Text</label>
+                        <input asp-for="AttributionText" class="form-control" />
+                        <span asp-validation-for="AttributionText" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="AttributionUrl" class="form-label">Attribution URL</label>
+                        <input asp-for="AttributionUrl" class="form-control" />
+                        <span asp-validation-for="AttributionUrl" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="mt-4 text-end">
+                    <a asp-action="Index" class="btn btn-secondary me-2">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </a>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

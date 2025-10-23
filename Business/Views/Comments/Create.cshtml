@@ -1,0 +1,98 @@
+﻿@model Business.Models.Blog.Comment
+
+@{
+    ViewData["Title"] = "Create Comment";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Create New Comment</h3>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <!-- Author Name -->
+                <div class="mb-3">
+                    <label asp-for="AuthorName" class="form-label fw-bold"></label>
+                    <input asp-for="AuthorName" class="form-control" placeholder="Enter author name" />
+                    <span asp-validation-for="AuthorName" class="text-danger"></span>
+                </div>
+
+                <!-- Author Image -->
+                <!-- Author Image -->
+                <div class="form-group">
+                    <label asp-for="AuthorImageFile">Author Image</label>
+                    <input asp-for="AuthorImageFile" type="file" class="form-control" id="AuthorImage" />
+                    <span asp-validation-for="AuthorImageFile" class="text-danger"></span>
+                </div>
+
+
+                <!-- Image Preview -->
+                <div class="mb-3 text-center">
+                    <img id="preview" class="img-thumbnail shadow-sm" style="max-width:150px; display:none;" />
+                </div>
+
+                <!-- Date -->
+                <div class="mb-3">
+                    <label asp-for="Date" class="form-label fw-bold"></label>
+                    <input asp-for="Date" class="form-control" type="date" />
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+
+                <!-- Comment Content -->
+                <div class="mb-3">
+                    <label asp-for="Content" class="form-label fw-bold"></label>
+                    <textarea asp-for="Content" class="form-control" rows="4" placeholder="Write your comment here..."></textarea>
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+
+                <!-- Is Reply -->
+                <div class="form-check mb-3">
+                    <input asp-for="IsReply" class="form-check-input" />
+                    <label asp-for="IsReply" class="form-check-label fw-bold"></label>
+                </div>
+
+                <!-- Select Blog -->
+                <div class="mb-3">
+                    <label asp-for="BlogDetailId" class="form-label fw-bold"></label>
+                    <select asp-for="BlogDetailId" class="form-select" asp-items="ViewBag.BlogDetailId">
+                        <option value="">-- Select Blog --</option>
+                    </select>
+                    <span asp-validation-for="BlogDetailId" class="text-danger"></span>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex gap-2">
+                    <input type="submit" value="Create" class="btn btn-success" />
+                    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const input = document.getElementById('AuthorImage');
+        const preview = document.getElementById('preview');
+
+        input.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function () {
+                    preview.setAttribute('src', reader.result);
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

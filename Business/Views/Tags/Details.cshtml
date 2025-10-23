@@ -1,0 +1,35 @@
+﻿@model Business.Models.Blog.Tag
+
+@{
+    ViewData["Title"] = "Tag Details";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1 class="mb-4">Tag Details</h1>
+
+<div class="card shadow-sm p-3 mb-4">
+    <div class="card-body">
+        <dl class="row mb-3">
+            <dt class="col-sm-3">Name</dt>
+            <dd class="col-sm-9">@Model.Name</dd>
+
+            <dt class="col-sm-3">Link</dt>
+            <dd class="col-sm-9">@Model.Link</dd>
+
+            <dt class="col-sm-3">Blog Detail</dt>
+            <dd class="col-sm-9">
+                @if (Model.BlogDetail != null)
+                {
+                    @Model.BlogDetail.Title
+                }
+                else
+                {
+                    <span class="text-muted">No Blog Detail assigned</span>
+                }
+            </dd>
+        </dl>
+
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+        <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+    </div>
+</div>

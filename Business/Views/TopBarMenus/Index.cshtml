@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Business.Models.Menu.TopBarMenu>
+
+@{
+    ViewData["Title"] = "Topbar Menus";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container-fluid mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="mb-0">Topbar Menu List</h2>
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Address)</th>
+                    <th>@Html.DisplayNameFor(model => model.Phone)</th>
+                    <th>@Html.DisplayNameFor(model => model.Email)</th>
+                    <th>@Html.DisplayNameFor(model => model.TwitterUrl)</th>
+                    <th>@Html.DisplayNameFor(model => model.FacebookUrl)</th>
+                    <th>@Html.DisplayNameFor(model => model.LinkedInUrl)</th>
+                    <th>@Html.DisplayNameFor(model => model.InstagramUrl)</th>
+                    <th>@Html.DisplayNameFor(model => model.YouTubeUrl)</th>
+                    <th style="width: 150px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                        <td><a href="@item.TwitterUrl" target="_blank">Twitter</a></td>
+                        <td><a href="@item.FacebookUrl" target="_blank">Facebook</a></td>
+                        <td><a href="@item.LinkedInUrl" target="_blank">LinkedIn</a></td>
+                        <td><a href="@item.InstagramUrl" target="_blank">Instagram</a></td>
+                        <td><a href="@item.YouTubeUrl" target="_blank">YouTube</a></td>
+                        <td>
+                            <div class="btn-group">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

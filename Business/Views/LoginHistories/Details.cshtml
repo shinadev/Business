@@ -1,0 +1,41 @@
+﻿@model Business.Models.User.LoginHistory
+
+@{
+    ViewData["Title"] = "Login History Details";
+    Layout = "Admin";
+}
+
+<div class="container mt-4">
+    <div class="card shadow rounded">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Login History Details</h3>
+        </div>
+
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.AdminEmail)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.AdminEmail)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.AdminUsername)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.AdminUsername)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Role)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Role)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Timestamp)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Timestamp)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Action)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Action)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.IPAddress)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.IPAddress)</dd>
+            </dl>
+        </div>
+
+        <div class="card-footer text-end">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning me-2">Edit</a>
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</div>

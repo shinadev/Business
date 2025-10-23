@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Business.Models.Service.ServiceItem>
+
+@{
+    ViewData["Title"] = "Service Items";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1 class="mb-4">Service Items</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Service Item</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.First().IconClass)</th>
+            <th>@Html.DisplayNameFor(model => model.First().Title)</th>
+            <th>@Html.DisplayNameFor(model => model.First().Description)</th>
+            <th>@Html.DisplayNameFor(model => model.First().LinkUrl)</th>
+            <th>Service Section</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><i class="@item.IconClass"></i></td>
+                <td>@item.Title</td>
+                <td>@item.Description</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.LinkUrl))
+                    {
+                        <a href="@item.LinkUrl" target="_blank" rel="noopener noreferrer">@item.LinkUrl</a>
+                    }
+                    else
+                    {
+                        <span class="text-muted">No link</span>
+                    }
+                </td>
+                <td>@item.ServiceSection?.MainTitle ?? "No Section"</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info me-1">Details</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary me-1">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

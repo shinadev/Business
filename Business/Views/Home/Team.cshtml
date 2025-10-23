@@ -1,0 +1,121 @@
+﻿@model Business.ViewModels.TeamPageViewModel
+
+@{
+    ViewData["Title"] = "Team Members";
+}
+
+<!-- Page Header Start -->
+<div class="container-fluid bg-primary py-5 bg-header"   style="margin-bottom: 90px;"> @*background-image: url('@Url.Content(Model.Header.ImageUrl)'); background-size: cover; background-position: center;">*@
+    <div class="row py-5">
+        <div class="col-12 pt-lg-5 mt-lg-5 text-center">
+            <h1 class="display-4 text-white animated zoomIn">@Model.Header.Title</h1>
+            <a href="@Model.Header.BreadcrumbHomeUrl" class="h5 text-white">@Model.Header.BreadcrumbHomeText</a>
+            <i class="far fa-circle text-white px-2"></i>
+            <a href="@Model.Header.BreadcrumbCurrentUrl" class="h5 text-white">@Model.Header.BreadcrumbCurrentText</a>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+<!-- Team Start -->
+<div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container py-5">
+
+        <!-- Section Title -->
+        <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
+            <h5 class="fw-bold text-primary text-uppercase">@Model.Section.SectionTitle</h5>
+            <h1 class="mb-0">@Model.Section.MainHeading</h1>
+        </div>
+
+        <div class="row g-5">
+            @if (Model.Section.TeamMember != null && Model.Section.TeamMember.Any())
+            {
+                int i = 1;
+                foreach (var member in Model.Section.TeamMember)
+                {
+                    var delay = (i * 0.3).ToString("0.0") + "s";
+                    <div class="col-lg-4 wow slideInUp" data-wow-delay="@delay">
+                        <div class="team-item bg-light rounded overflow-hidden shadow-sm">
+                            <div class="team-img position-relative overflow-hidden">
+                                <img class="img-fluid w-100"
+                                     src="@(!string.IsNullOrEmpty(member.ImagePath) ? Url.Content(member.ImagePath) : Url.Content("~/img/default-team.jpg"))"
+                                     alt="@member.FullName" />
+                                <div class="team-social d-flex justify-content-center align-items-center">
+                                    @if (!string.IsNullOrEmpty(member.TwitterUrl))
+                                    {
+                                        <a class="btn btn-lg btn-primary btn-lg-square rounded mx-1" href="@member.TwitterUrl" target="_blank">
+                                            <i class="fab fa-twitter fw-normal"></i>
+                                        </a>
+                                    }
+                                    @if (!string.IsNullOrEmpty(member.FacebookUrl))
+                                    {
+                                        <a class="btn btn-lg btn-primary btn-lg-square rounded mx-1" href="@member.FacebookUrl" target="_blank">
+                                            <i class="fab fa-facebook-f fw-normal"></i>
+                                        </a>
+                                    }
+                                    @if (!string.IsNullOrEmpty(member.InstagramUrl))
+                                    {
+                                        <a class="btn btn-lg btn-primary btn-lg-square rounded mx-1" href="@member.InstagramUrl" target="_blank">
+                                            <i class="fab fa-instagram fw-normal"></i>
+                                        </a>
+                                    }
+                                    @if (!string.IsNullOrEmpty(member.LinkedInUrl))
+                                    {
+                                        <a class="btn btn-lg btn-primary btn-lg-square rounded mx-1" href="@member.LinkedInUrl" target="_blank">
+                                            <i class="fab fa-linkedin-in fw-normal"></i>
+                                        </a>
+                                    }
+                                </div>
+                            </div>
+                            <div class="text-center py-4">
+                                <h4 class="text-primary">@member.FullName</h4>
+                                <p class="text-uppercase m-0">@member.Designation</p>
+                            </div>
+                        </div>
+                    </div>
+                    i++;
+                }
+            }
+            else
+            {
+                <p class="text-center text-muted">No team members available.</p>
+            }
+        </div>
+    </div>
+</div>
+<!-- Team End -->
+
+<style>
+    .team-img {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .team-img img {
+            transition: transform 0.3s ease;
+        }
+
+        .team-img:hover img {
+            transform: scale(1.1);
+        }
+
+    .team-social {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+
+    .team-img:hover .team-social {
+        opacity: 1;
+    }
+
+    .team-social a {
+        transition: all 0.3s ease;
+    }
+
+        .team-social a:hover {
+            transform: translateY(-5px);
+        }
+</style>

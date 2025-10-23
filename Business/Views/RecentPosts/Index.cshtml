@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Business.Models.Blog.RecentPost>
+
+@{
+    ViewData["Title"] = "Recent Posts";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="mb-0">Recent Posts</h2>
+        <a asp-action="Create" class="btn btn-primary">+ Create New</a>
+    </div>
+
+    <table class="table table-striped table-hover align-middle shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Title)</th>
+                <th>@Html.DisplayNameFor(model => model.ImageUrl)</th>
+                <th>@Html.DisplayNameFor(model => model.Link)</th>
+                <th>Blog</th>
+                <th style="width: 160px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <!-- Title -->
+                    <td>@item.Title</td>
+
+                    <!-- Image -->
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.ImageUrl))
+                        {
+                            <img src="@item.ImageUrl" alt="@item.Title" class="img-thumbnail" style="max-width: 80px; max-height: 80px;" />
+                        }
+                        else
+                        {
+                            <span class="text-muted">No Image</span>
+                        }
+                    </td>
+
+                    <!-- Link -->
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.Link))
+                        {
+                            <a href="@item.Link" target="_blank">@item.Link</a>
+                        }
+                        else
+                        {
+                            <span class="text-muted">No Link</span>
+                        }
+                    </td>
+
+                    <!-- Blog Detail -->
+                    <td>
+                        @if (item.BlogDetail != null)
+                        {
+                            @item.BlogDetail.Title
+                        }
+                        else
+                        {
+                            <span class="text-muted">No Blog</span>
+                        }
+                    </td>
+
+                    <!-- Actions -->
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info text-white">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger"
+                           onclick="return confirm('Are you sure you want to delete this post?');">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

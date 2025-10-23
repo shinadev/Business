@@ -1,0 +1,90 @@
+﻿@model Business.Models.Menu.TopBarMenu
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1 class="mb-4">TopBar Menu Details</h1>
+
+<div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Details</h4>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Address)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Address)</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Phone)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Phone)</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Email)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Email)</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.TwitterUrl)</dt>
+            <dd class="col-sm-9">
+                @if (!string.IsNullOrWhiteSpace(Model.TwitterUrl))
+                {
+                    <a href="@Model.TwitterUrl" target="_blank" rel="noopener noreferrer">@Model.TwitterUrl</a>
+                }
+                else
+                {
+                    <span class="text-muted">N/A</span>
+                }
+            </dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.FacebookUrl)</dt>
+            <dd class="col-sm-9">
+                @if (!string.IsNullOrWhiteSpace(Model.FacebookUrl))
+                {
+                    <a href="@Model.FacebookUrl" target="_blank" rel="noopener noreferrer">@Model.FacebookUrl</a>
+                }
+                else
+                {
+                    <span class="text-muted">N/A</span>
+                }
+            </dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.LinkedInUrl)</dt>
+            <dd class="col-sm-9">
+                @if (!string.IsNullOrWhiteSpace(Model.LinkedInUrl))
+                {
+                    <a href="@Model.LinkedInUrl" target="_blank" rel="noopener noreferrer">@Model.LinkedInUrl</a>
+                }
+                else
+                {
+                    <span class="text-muted">N/A</span>
+                }
+            </dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.InstagramUrl)</dt>
+            <dd class="col-sm-9">
+                @if (!string.IsNullOrWhiteSpace(Model.InstagramUrl))
+                {
+                    <a href="@Model.InstagramUrl" target="_blank" rel="noopener noreferrer">@Model.InstagramUrl</a>
+                }
+                else
+                {
+                    <span class="text-muted">N/A</span>
+                }
+            </dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.YouTubeUrl)</dt>
+            <dd class="col-sm-9">
+                @if (!string.IsNullOrWhiteSpace(Model.YouTubeUrl))
+                {
+                    <a href="@Model.YouTubeUrl" target="_blank" rel="noopener noreferrer">@Model.YouTubeUrl</a>
+                }
+                else
+                {
+                    <span class="text-muted">N/A</span>
+                }
+            </dd>
+        </dl>
+    </div>
+    <div class="card-footer d-flex justify-content-between">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>

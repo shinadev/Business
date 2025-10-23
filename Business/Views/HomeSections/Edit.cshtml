@@ -1,0 +1,104 @@
+﻿@model Business.Models.Home.HomeSection
+
+@{
+    ViewData["Title"] = "Edit Home Section";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1>Edit Home Section</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <input type="hidden" asp-for="Id" />
+
+            <!-- Current Image Preview -->
+            <div class="mb-3">
+                <label class="form-label">Current Image</label><br />
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img src="@Model.ImageUrl" alt="Current Image" class="img-thumbnail mb-2" style="max-width: 300px;" />
+                }
+                else
+                {
+                    <p class="text-muted">No image uploaded</p>
+                }
+            </div>
+
+            <!-- New Image Upload -->
+            <div class="mb-3">
+                <label for="imageFile" class="form-label">Upload New Image</label>
+                <input type="file" name="imageFile" class="form-control" id="imageFile" accept="image/*" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+
+            <!-- Caption Small -->
+            <div class="mb-3">
+                <label asp-for="CaptionSmall" class="form-label"></label>
+                <input asp-for="CaptionSmall" class="form-control" />
+                <span asp-validation-for="CaptionSmall" class="text-danger"></span>
+            </div>
+
+            <!-- Caption Large -->
+            <div class="mb-3">
+                <label asp-for="CaptionLarge" class="form-label"></label>
+                <input asp-for="CaptionLarge" class="form-control" />
+                <span asp-validation-for="CaptionLarge" class="text-danger"></span>
+            </div>
+
+            <!-- Button 1 Text -->
+            <div class="mb-3">
+                <label asp-for="Button1Text" class="form-label"></label>
+                <input asp-for="Button1Text" class="form-control" />
+                <span asp-validation-for="Button1Text" class="text-danger"></span>
+            </div>
+
+            <!-- Button 1 URL -->
+            <div class="mb-3">
+                <label asp-for="Button1Url" class="form-label"></label>
+                <input asp-for="Button1Url" class="form-control" />
+                <span asp-validation-for="Button1Url" class="text-danger"></span>
+            </div>
+
+            <!-- Button 2 Text -->
+            <div class="mb-3">
+                <label asp-for="Button2Text" class="form-label"></label>
+                <input asp-for="Button2Text" class="form-control" />
+                <span asp-validation-for="Button2Text" class="text-danger"></span>
+            </div>
+
+            <!-- Button 2 URL -->
+            <div class="mb-3">
+                <label asp-for="Button2Url" class="form-label"></label>
+                <input asp-for="Button2Url" class="form-control" />
+                <span asp-validation-for="Button2Url" class="text-danger"></span>
+            </div>
+
+            <!-- Display Order -->
+            <div class="mb-3">
+                <label asp-for="DisplayOrder" class="form-label"></label>
+                <input asp-for="DisplayOrder" class="form-control" type="number" />
+                <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+            </div>
+
+            <!-- Is Active -->
+            <div class="form-check mb-3">
+                <input class="form-check-input" asp-for="IsActive" />
+                <label class="form-check-label" asp-for="IsActive"></label>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

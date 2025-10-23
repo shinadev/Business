@@ -1,0 +1,46 @@
+﻿@model Business.Models.Blog.Tag
+
+@{
+    ViewData["Title"] = "Create Tag";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1 class="mb-4">Create Tag</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" placeholder="Enter tag name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Link" class="form-label"></label>
+                <input asp-for="Link" class="form-control" placeholder="Enter tag link" />
+                <span asp-validation-for="Link" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="BlogDetailId" class="form-label"></label>
+                <select asp-for="BlogDetailId" class="form-select" asp-items="ViewBag.BlogDetailId">
+                    <option value="">-- Select Blog Detail --</option>
+                </select>
+                <span asp-validation-for="BlogDetailId" class="text-danger"></span>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Create</button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

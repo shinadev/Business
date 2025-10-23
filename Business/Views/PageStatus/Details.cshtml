@@ -1,0 +1,28 @@
+﻿@model Business.Models.Page.PageStatus
+
+@{
+    ViewData["Title"] = "Page Status Details";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow border-0">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Page Status Details</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row mb-3">
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+            </dl>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-sm">Edit</a>
+            <a asp-action="Index" class="btn btn-secondary btn-sm">Back to List</a>
+        </div>
+    </div>
+</div>

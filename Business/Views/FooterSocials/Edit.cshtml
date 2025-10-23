@@ -1,0 +1,57 @@
+﻿@model Business.Models.Menu.FooterSocial
+
+@{
+    ViewData["Title"] = "Edit Footer Social";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-0 rounded-3">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Edit Footer Social</h3>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <input type="hidden" asp-for="Id" />
+
+                <div class="mb-3">
+                    <label asp-for="Platform" class="form-label fw-bold"></label>
+                    <input asp-for="Platform" class="form-control" placeholder="e.g., Facebook, Twitter" />
+                    <span asp-validation-for="Platform" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="IconClass" class="form-label fw-bold"></label>
+                    <input asp-for="IconClass" class="form-control" placeholder="e.g., fab fa-facebook-f" />
+                    <span asp-validation-for="IconClass" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Url" class="form-label fw-bold"></label>
+                    <input asp-for="Url" class="form-control" placeholder="e.g., https://facebook.com/yourpage" />
+                    <span asp-validation-for="Url" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="FooterMenuId" class="form-label fw-bold">Select Footer Menu</label>
+                    <select asp-for="FooterMenuId" class="form-select" asp-items="ViewBag.FooterMenuId">
+                        <option value="">-- Select Footer Menu --</option>
+                    </select>
+                    <span asp-validation-for="FooterMenuId" class="text-danger small"></span>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+                    <button type="submit" class="btn btn-success px-4">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

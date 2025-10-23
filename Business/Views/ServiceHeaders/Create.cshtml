@@ -1,0 +1,85 @@
+﻿@model Business.Models.Service.ServiceHeader
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1 class="mb-4">Create Service Header</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="BreadcrumbHomeText" class="form-label"></label>
+                <input asp-for="BreadcrumbHomeText" class="form-control" />
+                <span asp-validation-for="BreadcrumbHomeText" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="BreadcrumbHomeUrl" class="form-label"></label>
+                <input asp-for="BreadcrumbHomeUrl" class="form-control" />
+                <span asp-validation-for="BreadcrumbHomeUrl" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="BreadcrumbCurrentText" class="form-label"></label>
+                <input asp-for="BreadcrumbCurrentText" class="form-control" />
+                <span asp-validation-for="BreadcrumbCurrentText" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="BreadcrumbCurrentUrl" class="form-label"></label>
+                <input asp-for="BreadcrumbCurrentUrl" class="form-control" />
+                <span asp-validation-for="BreadcrumbCurrentUrl" class="text-danger"></span>
+            </div>
+
+            <!-- Image upload -->
+            <div class="mb-3">
+                <label for="ImageFile" class="form-label">Upload Image</label>
+                <input asp-for="ImageFile" type="file" class="form-control" id="ImageFile" accept="image/*" onchange="previewImage(event)" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+
+            <!-- Image preview -->
+            <div class="mb-3">
+                <img id="imagePreview" src="#" alt="Image Preview" class="img-thumbnail" style="display:none; max-height: 200px;" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create</button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        function previewImage(event) {
+            var input = event.target;
+            var preview = document.getElementById('imagePreview');
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                preview.src = '#';
+                preview.style.display = 'none';
+            }
+        }
+    </script>
+}

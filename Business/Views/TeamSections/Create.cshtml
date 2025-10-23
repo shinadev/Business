@@ -1,0 +1,39 @@
+﻿@model Business.Models.Team.TeamSection
+
+@{
+    ViewData["Title"] = "Create Team Section";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1 class="mb-4">Create Team Section</h1>
+
+<div class="row">
+    <div class="col-md-6 col-lg-4">
+        <form asp-action="Create" novalidate>
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="SectionTitle" class="form-label"></label>
+                <input asp-for="SectionTitle" class="form-control" />
+                <span asp-validation-for="SectionTitle" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="MainHeading" class="form-label"></label>
+                <input asp-for="MainHeading" class="form-control" />
+                <span asp-validation-for="MainHeading" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-plus-circle me-1"></i> Create
+            </button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

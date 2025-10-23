@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Business.Models.Service.ServiceHeader>
+
+@{
+    ViewData["Title"] = "Service Headers";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1 class="mb-4">Service Headers</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Create New</a>
+</p>
+
+<table class="table table-striped table-hover align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Title)</th>
+            <th>@Html.DisplayNameFor(model => model.BreadcrumbHomeText)</th>
+            <th>@Html.DisplayNameFor(model => model.BreadcrumbHomeUrl)</th>
+            <th>@Html.DisplayNameFor(model => model.BreadcrumbCurrentText)</th>
+            <th>@Html.DisplayNameFor(model => model.BreadcrumbCurrentUrl)</th>
+            <th>Image</th>
+            <th style="width: 160px;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                <td>@Html.DisplayFor(modelItem => item.BreadcrumbHomeText)</td>
+                <td>@Html.DisplayFor(modelItem => item.BreadcrumbHomeUrl)</td>
+                <td>@Html.DisplayFor(modelItem => item.BreadcrumbCurrentText)</td>
+                <td>@Html.DisplayFor(modelItem => item.BreadcrumbCurrentUrl)</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                    {
+                      <img src="@item.ImageUrl" alt="@item.Title" style="height: 60px; border-radius: 5px;" />
+                    }
+                    else
+                    {
+                        <span class="text-muted">No Image</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary me-1">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info me-1">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

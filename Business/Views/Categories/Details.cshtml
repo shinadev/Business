@@ -1,0 +1,46 @@
+﻿@model Business.Models.Menu.Category
+
+@{
+    ViewData["Title"] = "Category Details";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">Category Details</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title mb-3">Category Information</h4>
+            <dl class="row">
+                <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Name)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(m => m.Name)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Slug)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(m => m.Slug)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Description)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(m => m.Description)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Order)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(m => m.Order)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(m => m.IsActive)</dt>
+                <dd class="col-sm-9">
+                    @if (Model.IsActive)
+                    {
+                        <span class="badge bg-success">Active</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Inactive</span>
+                    }
+                </dd>
+            </dl>
+
+            <div class="mt-4">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary me-2">Edit</a>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

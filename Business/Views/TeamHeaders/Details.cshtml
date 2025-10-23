@@ -1,0 +1,46 @@
+﻿@model Business.Models.Team.TeamHeader
+
+@{
+    ViewData["Title"] = "Team Header Details";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h2 class="mb-4">Team Header Details</h2>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Title</dt>
+            <dd class="col-sm-9">@Model.Title</dd>
+
+            <dt class="col-sm-3">Breadcrumb Home Text</dt>
+            <dd class="col-sm-9">@Model.BreadcrumbHomeText</dd>
+
+            <dt class="col-sm-3">Breadcrumb Home URL</dt>
+            <dd class="col-sm-9">@Model.BreadcrumbHomeUrl</dd>
+
+            <dt class="col-sm-3">Breadcrumb Current Text</dt>
+            <dd class="col-sm-9">@Model.BreadcrumbCurrentText</dd>
+
+            <dt class="col-sm-3">Breadcrumb Current URL</dt>
+            <dd class="col-sm-9">@Model.BreadcrumbCurrentUrl</dd>
+
+            <dt class="col-sm-3">Header Image</dt>
+            <dd class="col-sm-9">
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img src="@Model.ImageUrl" alt="Header Image" class="img-fluid rounded shadow-sm" style="max-height:200px;" />
+                }
+                else
+                {
+                    <span class="text-muted">No image uploaded</span>
+                }
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div class="d-flex justify-content-between">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

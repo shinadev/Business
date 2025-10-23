@@ -1,0 +1,52 @@
+﻿@model Business.Models.Service.ServiceItem
+
+@{
+    ViewData["Title"] = "Service Item Details";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1 class="mb-4">Service Item Details</h1>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3">@Html.DisplayNameFor(m => m.IconClass)</dt>
+            <dd class="col-sm-9">
+                @if (!string.IsNullOrEmpty(Model.IconClass))
+                {
+                    <i class="@Model.IconClass" style="font-size: 1.5rem;"></i>
+                }
+                else
+                {
+                    <span>No icon specified</span>
+                }
+            </dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Title)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(m => m.Title)</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Description)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(m => m.Description)</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(m => m.LinkUrl)</dt>
+            <dd class="col-sm-9">
+                @if (!string.IsNullOrEmpty(Model.LinkUrl))
+                {
+                    <a href="@Model.LinkUrl" target="_blank" rel="noopener noreferrer">@Model.LinkUrl</a>
+                }
+                else
+                {
+                    <span class="text-muted">No link provided</span>
+                }
+            </dd>
+
+            <dt class="col-sm-3">Service Section</dt>
+            <dd class="col-sm-9">@Model.ServiceSection?.MainTitle ?? "No Section"</dd>
+        </dl>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary me-2">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

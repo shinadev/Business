@@ -1,0 +1,31 @@
+﻿@model Business.Models.User.AdminUser
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "Admin";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3>Admin User Details</h3>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Username)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Username)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Email)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Email)</dd>
+
+                <dt class="col-sm-3">Role</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Role.Name)</dd>
+            </dl>
+
+            <div class="mt-3">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+                <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

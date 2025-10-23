@@ -1,0 +1,40 @@
+﻿@model Business.Models.Blog.Tag
+
+@{
+    ViewData["Title"] = "Delete Tag";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1 class="mb-4 text-danger">Delete Tag</h1>
+
+<h5>Are you sure you want to delete this tag?</h5>
+
+<div class="card shadow-sm p-3 mb-4">
+    <div class="card-body">
+        <dl class="row mb-3">
+            <dt class="col-sm-3">Name</dt>
+            <dd class="col-sm-9">@Model.Name</dd>
+
+            <dt class="col-sm-3">Link</dt>
+            <dd class="col-sm-9">@Model.Link</dd>
+
+            <dt class="col-sm-3">Blog Detail</dt>
+            <dd class="col-sm-9">
+                @if (Model.BlogDetail != null)
+                {
+                    @Model.BlogDetail.Title
+                }
+                else
+                {
+                    <span class="text-muted">No Blog Detail assigned</span>
+                }
+            </dd>
+        </dl>
+
+        <form asp-action="Delete" method="post">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+        </form>
+    </div>
+</div>

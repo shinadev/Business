@@ -1,0 +1,90 @@
+﻿@model Business.Models.Contact.ContactHeader
+
+@{
+    ViewData["Title"] = "Create Contact Header";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-0 rounded-3">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">➕ Create Contact Header</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label fw-bold"></label>
+                    <input asp-for="Title" class="form-control" placeholder="Enter header title" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="BreadcrumbHomeText" class="form-label fw-bold"></label>
+                        <input asp-for="BreadcrumbHomeText" class="form-control" placeholder="e.g. Home" />
+                        <span asp-validation-for="BreadcrumbHomeText" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="BreadcrumbHomeUrl" class="form-label fw-bold"></label>
+                        <input asp-for="BreadcrumbHomeUrl" class="form-control" placeholder="/home" />
+                        <span asp-validation-for="BreadcrumbHomeUrl" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="BreadcrumbCurrentText" class="form-label fw-bold"></label>
+                        <input asp-for="BreadcrumbCurrentText" class="form-control" placeholder="e.g. Contact" />
+                        <span asp-validation-for="BreadcrumbCurrentText" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="BreadcrumbCurrentUrl" class="form-label fw-bold"></label>
+                        <input asp-for="BreadcrumbCurrentUrl" class="form-control" placeholder="/contact" />
+                        <span asp-validation-for="BreadcrumbCurrentUrl" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Image Upload with Preview -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Upload Header Image</label>
+                    <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" onchange="previewImage(event)" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+
+                    <!-- Preview box -->
+                    <div class="mt-3">
+                        <img id="imagePreview" src="#" alt="Image Preview" class="img-thumbnail shadow-sm d-none" style="max-height:200px;" />
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to List
+                    </a>
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-check-circle"></i> Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('imagePreview');
+                output.src = reader.result;
+                output.classList.remove("d-none");
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+}

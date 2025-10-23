@@ -1,0 +1,47 @@
+﻿@model Business.ViewModels.ServiceSectionViewModel
+
+@{
+    ViewData["Title"] = "Service Section Details";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow rounded-3">
+        <div class="card-header bg-info text-white">
+            <h4><i class="bi bi-info-circle-fill"></i> Service Section Details</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row mb-3">
+                <dt class="col-sm-3 fw-bold">Small Title</dt>
+                <dd class="col-sm-9">@Model.ServiceSection.SmallTitle</dd>
+
+                <dt class="col-sm-3 fw-bold">Main Title</dt>
+                <dd class="col-sm-9">@Model.ServiceSection.MainTitle</dd>
+            </dl>
+
+            @if (Model.CallToAction != null)
+            {
+                <hr />
+                <h5>Call To Action</h5>
+                <dl class="row">
+                    <dt class="col-sm-3 fw-bold">Title</dt>
+                    <dd class="col-sm-9">@Model.CallToAction.Title</dd>
+
+                    <dt class="col-sm-3 fw-bold">Description</dt>
+                    <dd class="col-sm-9">@Model.CallToAction.Description</dd>
+
+                    <dt class="col-sm-3 fw-bold">Phone Number</dt>
+                    <dd class="col-sm-9">@Model.CallToAction.PhoneNumber</dd>
+                </dl>
+            }
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            <a asp-action="Edit" asp-route-id="@Model.ServiceSection.Id" class="btn btn-warning">
+                <i class="bi bi-pencil-square"></i> Edit
+            </a>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Back to List
+            </a>
+        </div>
+    </div>
+</div>

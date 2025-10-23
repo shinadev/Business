@@ -1,0 +1,49 @@
+﻿@model Business.Models.Blog.Comment
+
+@{
+    ViewData["Title"] = "Comment Details";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm border-primary">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Comment Details</h3>
+        </div>
+        <div class="card-body">
+            <dl class="row mb-3">
+                <dt class="col-sm-3 fw-bold">Author Name</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.AuthorName)</dd>
+
+                <dt class="col-sm-3 fw-bold">Author Image</dt>
+                <dd class="col-sm-9">
+                    @if (!string.IsNullOrEmpty(Model.AuthorImageUrl))
+                    {
+                        <img src="@Model.AuthorImageUrl" class="img-thumbnail" style="max-width:150px;" />
+                    }
+                    else
+                    {
+                        <span class="text-muted">No image</span>
+                    }
+                </dd>
+
+                <dt class="col-sm-3 fw-bold">Date</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Date)</dd>
+
+                <dt class="col-sm-3 fw-bold">Content</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Content)</dd>
+
+                <dt class="col-sm-3 fw-bold">Is Reply</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.IsReply)</dd>
+
+                <dt class="col-sm-3 fw-bold">Blog</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.BlogDetail.Title)</dd>
+            </dl>
+
+            <div class="d-flex gap-2">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

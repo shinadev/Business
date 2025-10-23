@@ -1,0 +1,109 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "Admin";
+}
+
+<div class="page-header">
+    <h3 class="page-title">Welcome, @ViewBag.AdminUsername!</h3>
+    <p class="text-muted">Role: @ViewBag.AdminRole</p>
+</div>
+
+<div class="row">
+    <!-- Users Card -->
+    <div class="col-md-3 grid-margin stretch-card">
+        <div class="card bg-info text-white">
+            <div class="card-body text-center">
+                <h5 class="card-title">Users</h5>
+                <h2>@ViewBag.UserCount</h2>
+                <a href="@Url.Action("Index", "AdminUsers")" class="btn btn-light btn-sm">Manage</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blogs Card -->
+    <div class="col-md-3 grid-margin stretch-card">
+        <div class="card bg-success text-white">
+            <div class="card-body text-center">
+                <h5 class="card-title">Blogs</h5>
+                <h2>@ViewBag.BlogCount</h2>
+                <a href="@Url.Action("Index", "BlogDetails")" class="btn btn-light btn-sm">Manage</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials Card -->
+    <div class="col-md-3 grid-margin stretch-card">
+        <div class="card bg-warning text-dark">
+            <div class="card-body text-center">
+                <h5 class="card-title">Testimonials</h5>
+                <h2>@ViewBag.TestimonialCount</h2>
+                <a href="@Url.Action("Index", "Testimonial")" class="btn btn-dark btn-sm">Manage</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pages Card -->
+    <div class="col-md-3 grid-margin stretch-card">
+        <div class="card bg-danger text-white">
+            <div class="card-body text-center">
+                <h5 class="card-title">Pages</h5>
+                <h2>@ViewBag.PageCount</h2>
+                <a href="@Url.Action("Index", "DynamicPages")" class="btn btn-light btn-sm">Manage</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Row -->
+<div class="row mt-4">
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Content Distribution (Pie Chart)</h5>
+                <canvas id="pieChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Content Overview (Bar Chart)</h5>
+                <canvas id="barChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Pie Chart
+        var ctxPie = document.getElementById('pieChart').getContext('2d');
+        var pieChart = new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+                labels: ['Users','Blogs','Testimonials','Pages'],
+                datasets: [{
+                    data: [@ViewBag.UserCount, @ViewBag.BlogCount, @ViewBag.TestimonialCount, @ViewBag.PageCount],
+                    backgroundColor: ['#0d6efd','#198754','#ffc107','#dc3545']
+                }]
+            },
+            options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+        });
+
+        // Bar Chart
+        var ctxBar = document.getElementById('barChart').getContext('2d');
+        var barChart = new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: ['Users','Blogs','Testimonials','Pages'],
+                datasets: [{
+                    label: 'Count',
+                    data: [@ViewBag.UserCount, @ViewBag.BlogCount, @ViewBag.TestimonialCount, @ViewBag.PageCount],
+                    backgroundColor: ['#0d6efd','#198754','#ffc107','#dc3545']
+                }]
+            },
+            options: { responsive: true, scales: { y: { beginAtZero: true } } }
+        });
+    </script>
+}

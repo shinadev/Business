@@ -1,0 +1,117 @@
+﻿@model Business.Models.Contact.ContactSection
+
+@{
+    ViewData["Title"] = "Create Contact Section";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h3 class="mb-0"><i class="bi bi-envelope-paper"></i> Create Contact Section</h3>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label asp-for="SmallTitle" class="form-label fw-bold"></label>
+                                <input asp-for="SmallTitle" class="form-control" placeholder="Enter small title" />
+                                <span asp-validation-for="SmallTitle" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="MainTitle" class="form-label fw-bold"></label>
+                                <input asp-for="MainTitle" class="form-control" placeholder="Enter main title" />
+                                <span asp-validation-for="MainTitle" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="PhoneTitle" class="form-label fw-bold"></label>
+                                <input asp-for="PhoneTitle" class="form-control" placeholder="e.g. Call Us" />
+                                <span asp-validation-for="PhoneTitle" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="PhoneNumber" class="form-label fw-bold"></label>
+                                <input asp-for="PhoneNumber" class="form-control" placeholder="+234 800 000 0000" />
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="EmailTitle" class="form-label fw-bold"></label>
+                                <input asp-for="EmailTitle" class="form-control" placeholder="e.g. Email Us" />
+                                <span asp-validation-for="EmailTitle" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="EmailAddress" class="form-label fw-bold"></label>
+                                <input asp-for="EmailAddress" class="form-control" placeholder="your@email.com" />
+                                <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="OfficeTitle" class="form-label fw-bold"></label>
+                                <input asp-for="OfficeTitle" class="form-control" placeholder="e.g. Office Address" />
+                                <span asp-validation-for="OfficeTitle" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="OfficeAddress" class="form-label fw-bold"></label>
+                                <input asp-for="OfficeAddress" class="form-control" placeholder="123 Main St, Lagos" />
+                                <span asp-validation-for="OfficeAddress" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="NamePlaceholder" class="form-label fw-bold"></label>
+                                <input asp-for="NamePlaceholder" class="form-control" placeholder="Enter Name Placeholder" />
+                                <span asp-validation-for="NamePlaceholder" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="EmailPlaceholder" class="form-label fw-bold"></label>
+                                <input asp-for="EmailPlaceholder" class="form-control" placeholder="Enter Email Placeholder" />
+                                <span asp-validation-for="EmailPlaceholder" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="SubjectPlaceholder" class="form-label fw-bold"></label>
+                                <input asp-for="SubjectPlaceholder" class="form-control" placeholder="Enter Subject Placeholder" />
+                                <span asp-validation-for="SubjectPlaceholder" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="MessagePlaceholder" class="form-label fw-bold"></label>
+                                <input asp-for="MessagePlaceholder" class="form-control" placeholder="Enter Message Placeholder" />
+                                <span asp-validation-for="MessagePlaceholder" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="ButtonText" class="form-label fw-bold"></label>
+                                <input asp-for="ButtonText" class="form-control" placeholder="e.g. Send Message" />
+                                <span asp-validation-for="ButtonText" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="MapUrl" class="form-label fw-bold"></label>
+                                <input asp-for="MapUrl" class="form-control" placeholder="Google Maps embed URL" />
+                                <span asp-validation-for="MapUrl" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mt-4">
+                            <a asp-action="Index" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left"></i> Back to List
+                            </a>
+                            <button type="submit" class="btn btn-success px-4">
+                                <i class="bi bi-check-circle"></i> Create
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

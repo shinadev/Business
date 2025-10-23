@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Business.Models.Team.TeamMember>
+
+@{
+    ViewData["Title"] = "Team Members";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1 class="mb-4">Team Members</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="bi bi-plus-circle me-1"></i> Add New Member
+    </a>
+</p>
+
+<table class="table table-striped table-bordered align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>Image</th>
+            <th>Full Name</th>
+            <th>Designation</th>
+            <th>Social Links</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var member in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@(!string.IsNullOrEmpty(member.ImagePath) ? member.ImagePath : "~/img/default-team.jpg")"
+                         alt="@member.FullName" class="img-thumbnail" style="width:60px;height:60px;" />
+                </td>
+                <td>@member.FullName</td>
+                <td>@member.Designation</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(member.TwitterUrl))
+                    {
+                        <a href="@member.TwitterUrl" target="_blank" class="me-1 text-info"><i class="fab fa-twitter"></i></a>
+                    }
+                    @if (!string.IsNullOrEmpty(member.FacebookUrl))
+                    {
+                        <a href="@member.FacebookUrl" target="_blank" class="me-1 text-primary"><i class="fab fa-facebook-f"></i></a>
+                    }
+                    @if (!string.IsNullOrEmpty(member.InstagramUrl))
+                    {
+                        <a href="@member.InstagramUrl" target="_blank" class="me-1 text-danger"><i class="fab fa-instagram"></i></a>
+                    }
+                    @if (!string.IsNullOrEmpty(member.LinkedInUrl))
+                    {
+                        <a href="@member.LinkedInUrl" target="_blank" class="text-primary"><i class="fab fa-linkedin-in"></i></a>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@member.Id" class="btn btn-warning btn-sm me-1">Edit</a>
+                    <a asp-action="Details" asp-route-id="@member.Id" class="btn btn-info btn-sm me-1">Details</a>
+                    <a asp-action="Delete" asp-route-id="@member.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

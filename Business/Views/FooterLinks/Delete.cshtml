@@ -1,0 +1,35 @@
+﻿@model Business.Models.Menu.FooterLink
+
+@{
+    ViewData["Title"] = "Delete Footer Link";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1 class="mb-4 text-danger">Delete Confirmation</h1>
+
+<div class="card border-danger shadow-sm mb-4">
+    <div class="card-header bg-danger text-white">
+        <h4 class="mb-0">Are you sure you want to delete this Footer Link?</h4>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3 fw-semibold">@Html.DisplayNameFor(model => model.Title)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Title)</dd>
+
+            <dt class="col-sm-3 fw-semibold">@Html.DisplayNameFor(model => model.Url)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Url)</dd>
+
+            <dt class="col-sm-3 fw-semibold">@Html.DisplayNameFor(model => model.LinkType)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.LinkType)</dd>
+
+            <dt class="col-sm-3 fw-semibold">@Html.DisplayNameFor(model => model.FooterMenu)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.FooterMenu.Id)</dd>
+        </dl>
+
+        <form asp-action="Delete" method="post" class="mt-4">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger me-2">Delete</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>

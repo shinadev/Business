@@ -1,0 +1,99 @@
+﻿@model Business.Models.Team.TeamHeader
+
+@{
+    ViewData["Title"] = "Edit Team Header";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h2 class="mb-4">Edit Team Header</h2>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="Id" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <!-- Title -->
+                    <div class="mb-3">
+                        <label asp-for="Title" class="form-label"></label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                    <!-- Breadcrumb Home Text -->
+                    <div class="mb-3">
+                        <label asp-for="BreadcrumbHomeText" class="form-label"></label>
+                        <input asp-for="BreadcrumbHomeText" class="form-control" />
+                        <span asp-validation-for="BreadcrumbHomeText" class="text-danger"></span>
+                    </div>
+
+                    <!-- Breadcrumb Home URL -->
+                    <div class="mb-3">
+                        <label asp-for="BreadcrumbHomeUrl" class="form-label"></label>
+                        <input asp-for="BreadcrumbHomeUrl" class="form-control" />
+                        <span asp-validation-for="BreadcrumbHomeUrl" class="text-danger"></span>
+                    </div>
+
+                    <!-- Breadcrumb Current Text -->
+                    <div class="mb-3">
+                        <label asp-for="BreadcrumbCurrentText" class="form-label"></label>
+                        <input asp-for="BreadcrumbCurrentText" class="form-control" />
+                        <span asp-validation-for="BreadcrumbCurrentText" class="text-danger"></span>
+                    </div>
+
+                    <!-- Breadcrumb Current URL -->
+                    <div class="mb-3">
+                        <label asp-for="BreadcrumbCurrentUrl" class="form-label"></label>
+                        <input asp-for="BreadcrumbCurrentUrl" class="form-control" />
+                        <span asp-validation-for="BreadcrumbCurrentUrl" class="text-danger"></span>
+                    </div>
+
+                    <!-- Image Upload -->
+                    <div class="mb-3">
+                        <label class="form-label">Header Image</label>
+                        <input asp-for="ImageFile" type="file" class="form-control" id="imageInput" />
+                        <span asp-validation-for="ImageFile" class="text-danger"></span>
+
+                        <!-- Current / Preview Image -->
+                        <div class="mt-3">
+                            <img id="imagePreview" src="@Model.ImageUrl" alt="Image Preview" class="img-fluid rounded shadow-sm" style="max-height:150px;" />
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Index" class="btn btn-secondary">Back</a>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        const imageInput = document.getElementById('imageInput');
+        const imagePreview = document.getElementById('imagePreview');
+
+        imageInput.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    imagePreview.setAttribute('src', e.target.result);
+                }
+                reader.readAsDataURL(file);
+            } else {
+                // If no file selected, keep current image
+                imagePreview.setAttribute('src', '@Model.ImageUrl');
+            }
+        });
+    </script>
+}

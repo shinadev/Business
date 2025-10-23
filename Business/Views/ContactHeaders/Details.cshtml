@@ -1,0 +1,53 @@
+﻿@model Business.Models.Contact.ContactHeader
+
+@{
+    ViewData["Title"] = "Contact Header Details";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-0 rounded-3">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">📋 Contact Header Details</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3 fw-bold">Title</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Title)</dd>
+
+                <dt class="col-sm-3 fw-bold">Breadcrumb Home</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.BreadcrumbHomeText)</dd>
+
+                <dt class="col-sm-3 fw-bold">Home URL</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.BreadcrumbHomeUrl)</dd>
+
+                <dt class="col-sm-3 fw-bold">Breadcrumb Current</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.BreadcrumbCurrentText)</dd>
+
+                <dt class="col-sm-3 fw-bold">Current URL</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.BreadcrumbCurrentUrl)</dd>
+
+                <dt class="col-sm-3 fw-bold">Header Image</dt>
+                <dd class="col-sm-9">
+                    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                    {
+                        <img src="@Model.ImageUrl" alt="Header Image" class="img-thumbnail shadow-sm" style="max-height:200px;" />
+                    }
+                    else
+                    {
+                        <span class="text-muted">No image uploaded</span>
+                    }
+                </dd>
+            </dl>
+
+            <div class="d-flex justify-content-between mt-4">
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Back to List
+                </a>
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+                    <i class="bi bi-pencil-square"></i> Edit
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

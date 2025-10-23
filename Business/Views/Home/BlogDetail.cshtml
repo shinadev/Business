@@ -1,0 +1,178 @@
+﻿@{
+    ViewData["Title"] = "Details";
+}
+
+@model Business.ViewModels.BlogDetailViewModel
+
+<!-- Header -->
+<div class="container-fluid bg-primary py-5 bg-header" style="margin-bottom: 90px;">
+    @*background-image: url('@Model.BlogHeader?.ImageUrl'); background-size:cover; background-position:center;">*@
+    <div class="row py-5">
+        <div class="col-12 pt-lg-5 mt-lg-5 text-center">
+            <h1 class="display-4 text-white animated zoomIn">@Model.BlogHeader?.Title</h1>
+            <a href="@Model.BlogHeader?.BreadcrumbHomeUrl" class="h5 text-white">
+                @Model.BlogHeader?.BreadcrumbHomeText
+            </a>
+            <i class="far fa-circle text-white px-2"></i>
+            <a href="@Model.BlogHeader?.BreadcrumbCurrentUrl" class="h5 text-white">
+                @Model.BlogHeader?.BreadcrumbCurrentText
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Blog Start -->
+<div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container py-5">
+        <div class="row g-5">
+            <div class="col-lg-8">
+
+                <!-- Blog Detail Start -->
+                <div class="mb-5">
+                    @if (!string.IsNullOrEmpty(Model.Blog.MainImageUrl))
+                    {
+                        <img class="img-fluid w-100 rounded mb-5" src="@Model.Blog.MainImageUrl" alt="@Model.Blog.Title">
+                    }
+
+                    <h1 class="mb-4">@Model.Blog.Title</h1>
+
+                    @foreach (var paragraph in Model.Blog.Paragraphs)
+                    {
+                        <p>@(string.IsNullOrEmpty(paragraph) ? "No text" : paragraph)</p>
+                    }
+
+
+                </div>
+                <!-- Blog Detail End -->
+                <!-- Comment List Start -->
+                <div class="mb-5">
+                    <div class="section-title section-title-sm position-relative pb-3 mb-4">
+                        <h3 class="mb-0">@Model.Comments.Count() Comments</h3>
+                    </div>
+
+                    @foreach (var comment in Model.Comments.Where(c => !c.IsReply))
+                    {
+                        <div class="d-flex mb-4">
+                            <img src="@comment.AuthorImageUrl" class="img-fluid rounded" style="width:45px; height:45px;" />
+                            <div class="ps-3">
+                                <h6>
+                                    <a href="">@comment.AuthorName</a>
+                                    <small><i>@comment.Date.ToString("dd MMM yyyy")</i></small>
+                                </h6>
+                                <p>@comment.Content</p>
+                                <button class="btn btn-sm btn-light">Reply</button>
+
+                                <!-- Replies -->
+                                @foreach (var reply in Model.Comments.Where(r => r.IsReply && r.BlogDetailId == comment.BlogDetailId))
+                                {
+                                    <div class="d-flex ms-5 mt-3">
+                                        <img src="@reply.AuthorImageUrl" class="img-fluid rounded" style="width:45px; height:45px;" />
+                                        <div class="ps-3">
+                                            <h6>@reply.AuthorName <small><i>@reply.Date.ToString("dd MMM yyyy")</i></small></h6>
+                                            <p>@reply.Content</p>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!-- Comment List End -->
+                <!-- Comment Form Start -->
+                <div class="bg-light rounded p-5">
+                    <div class="section-title section-title-sm position-relative pb-3 mb-4">
+                        <h3 class="mb-0">Leave A Comment</h3>
+                    </div>
+                    <form asp-action="AddComment" method="post">
+                        <input type="hidden" name="BlogDetailId" value="@Model.Blog.Id" />
+                        <div class="row g-3">
+                            <div class="col-12 col-sm-6">
+                                <input type="text" name="AuthorName" class="form-control bg-white border-0" placeholder="Your Name" style="height:55px;" required>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <input type="email" name="AuthorEmail" class="form-control bg-white border-0" placeholder="Your Email" style="height:55px;" required>
+                            </div>
+                            <div class="col-12">
+                                <textarea name="Content" class="form-control bg-white border-0" rows="5" placeholder="Comment" required></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="submit">Leave Your Comment</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Comment Form End -->
+            </div>
+
+            <!-- Sidebar Start -->
+            <div class="col-lg-4">
+
+                <!-- Categories -->
+                <div class="mb-5">
+                    <div class="section-title section-title-sm pb-3 mb-4">
+                        <h3 class="mb-0">Categories</h3>
+                    </div>
+                    <div class="link-animated d-flex flex-column">
+                        @foreach (var cat in Model.Categories)
+                        {
+                            <a class="h5 fw-semi-bold bg-light rounded py-2 px-3 mb-2" href="@cat.Link">
+                                <i class="bi bi-arrow-right me-2"></i>@cat.Name
+                            </a>
+                        }
+                    </div>
+                </div>
+
+
+                <!-- Recent Posts -->
+                <div class="mb-5">
+                    <div class="section-title section-title-sm pb-3 mb-4">
+                        <h3 class="mb-0">Recent Posts</h3>
+                    </div>
+                    @foreach (var post in Model.RecentPosts)
+                    {
+                        <div class="d-flex rounded overflow-hidden mb-3">
+                            <img class="img-fluid" src="@post.ImageUrl" style="width:100px; height:100px; object-fit:cover;" alt="@post.Title">
+                            <a href="@post.Link" class="h5 fw-semi-bold d-flex align-items-center bg-light px-3 mb-0">@post.Title</a>
+                        </div>
+                    }
+                </div>
+
+                <!-- Tags -->
+                <div class="mb-5">
+                    <div class="section-title section-title-sm pb-3 mb-4">
+                        <h3 class="mb-0">Tag Cloud</h3>
+                    </div>
+                    <div class="d-flex flex-wrap m-n1">
+                        @foreach (var tag in Model.Tags)
+                        {
+                            <a href="@tag.Link" class="btn btn-light m-1">@tag.Name</a>
+                        }
+                    </div>
+                </div>
+
+                @* Sidebar Image if exists *@
+                @if (!string.IsNullOrEmpty(Model.Blog?.SidebarImageUrl))
+                {
+                    <img class="img-fluid w-100 rounded mt-4 mb-4" src="@Model.Blog.SidebarImageUrl" alt="Sidebar Image">
+                }
+                <!-- Plain Text -->
+
+                @if (Model.PlainText != null)
+                {
+                    <div>
+                        <div class="section-title section-title-sm pb-3 mb-4">
+                            <h3 class="mb-0">Plain Text</h3>
+                        </div>
+                        <div class="bg-light text-center p-3">
+                            <p>@Model.PlainText.Content</p>
+                            <a href="@Model.PlainText.ReadMoreLink" class="btn btn-primary py-2 px-4">Read More</a>
+                        </div>
+                    </div>
+                }
+            </div>
+            <!-- Sidebar End -->
+
+        </div>
+    </div>
+</div>
+<!-- Blog End -->

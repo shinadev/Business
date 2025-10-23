@@ -1,0 +1,47 @@
+﻿@model Business.Models.Service.ServiceHeader
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1 class="mb-4">Service Header Details</h1>
+
+<div class="card p-4 mb-4">
+    <h4>Service Header</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Title)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Title)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.BreadcrumbHomeText)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.BreadcrumbHomeText)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.BreadcrumbHomeUrl)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.BreadcrumbHomeUrl)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.BreadcrumbCurrentText)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.BreadcrumbCurrentText)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.BreadcrumbCurrentUrl)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.BreadcrumbCurrentUrl)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.ImageUrl)</dt>
+        <dd class="col-sm-9">
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <img src="@Model.ImageUrl" alt="@Model.Title" style="max-height: 200px; border-radius: 5px;" />
+            }
+
+            else
+            {
+                <span>No image available</span>
+            }
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary me-2">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

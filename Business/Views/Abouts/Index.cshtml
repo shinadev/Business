@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Business.Models.About.AboutSection>
+
+@{
+    ViewData["Title"] = "About Sections";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1 class="mb-4">About Sections</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">
+        <i class="bi bi-plus-lg"></i> Create New
+    </a>
+</p>
+
+<table class="table table-striped table-hover align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Subtitle)</th>
+            <th>@Html.DisplayNameFor(model => model.Title)</th>
+            <th>@Html.DisplayNameFor(model => model.Description)</th>
+            <th>@Html.DisplayNameFor(model => model.Feature1)</th>
+            <th>@Html.DisplayNameFor(model => model.Feature2)</th>
+            <th>@Html.DisplayNameFor(model => model.Feature3)</th>
+            <th>@Html.DisplayNameFor(model => model.Feature4)</th>
+            <th>@Html.DisplayNameFor(model => model.ContactText)</th>
+            <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+            <th>@Html.DisplayNameFor(model => model.QuoteButtonText)</th>
+            <th>@Html.DisplayNameFor(model => model.QuoteButtonUrl)</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Subtitle</td>
+                <td>@item.Title</td>
+                <td>
+                    @((item.Description?.Length > 60)
+                                    ? item.Description.Substring(0, 60) + "..."
+                                    : item.Description )
+            </td>
+
+                <td>@item.Feature1</td>
+                <td>@item.Feature2</td>
+                <td>@item.Feature3</td>
+                <td>@item.Feature4</td>
+                <td>@item.ContactText</td>
+                <td>@item.PhoneNumber</td>
+                <td>@item.QuoteButtonText</td>
+                <td><a href="@item.QuoteButtonUrl" target="_blank">@item.QuoteButtonUrl</a></td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                    {
+                        <img src="@item.ImageUrl" alt="About Image" class="img-thumbnail" style="max-height: 80px; max-width: 120px;" />
+                    }
+                    else
+                    {
+                        <span class="text-muted">No Image</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary me-1">
+                        <i class="bi bi-pencil-square"></i> Edit
+                    </a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info me-1">
+                        <i class="bi bi-info-circle"></i> Details
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">
+                        <i class="bi bi-trash"></i> Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

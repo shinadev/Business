@@ -1,0 +1,97 @@
+﻿@model Business.Models.Page.PageLayoutSection
+
+@{
+    ViewData["Title"] = "Create Page Layout Section";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1 class="mb-4">@ViewData["Title"]</h1>
+
+<h4 class="mb-3">Page Layout Section Details</h4>
+<hr />
+
+@if (ViewBag.ModelErrors != null)
+{
+    <div class="alert alert-danger">
+        <strong>There were some errors:</strong>
+        <ul>
+            @foreach (var error in ViewBag.ModelErrors)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <form asp-action="Create" method="post" novalidate>
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="DynamicPageId" class="form-label fw-semibold"></label>
+                <select asp-for="DynamicPageId" class="form-select" asp-items="ViewBag.DynamicPageId">
+                    <option value="">-- Select Page --</option>
+                </select>
+                <span asp-validation-for="DynamicPageId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="LayoutSectionId" class="form-label fw-semibold"></label>
+                <select asp-for="LayoutSectionId" class="form-select" asp-items="ViewBag.LayoutSectionId">
+                    <option value="">-- Select Layout Section --</option>
+                </select>
+                <span asp-validation-for="LayoutSectionId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label fw-semibold"></label>
+                <input asp-for="Title" class="form-control" placeholder="Enter section title" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Content" class="form-label fw-semibold"></label>
+                <textarea asp-for="Content" class="form-control" rows="5" placeholder="Enter content here"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="SortOrder" class="form-label fw-semibold"></label>
+                <input asp-for="SortOrder" class="form-control" type="number" min="0" />
+                <span asp-validation-for="SortOrder" class="text-danger"></span>
+            </div>
+
+            <div class="form-check mb-4">
+                <input asp-for="IsActive" class="form-check-input" />
+                <label asp-for="IsActive" class="form-check-label fw-semibold"></label>
+            </div>
+
+            <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <label asp-for="CreatedAt" class="form-label fw-semibold"></label>
+                    <input asp-for="CreatedAt" class="form-control" type="date" />
+                    <span asp-validation-for="CreatedAt" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="UpdatedAt" class="form-label fw-semibold"></label>
+                    <input asp-for="UpdatedAt" class="form-control" type="date" />
+                    <span asp-validation-for="UpdatedAt" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-start">
+                <button type="submit" class="btn btn-primary me-2">Create</button>
+                <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

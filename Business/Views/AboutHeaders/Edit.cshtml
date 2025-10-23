@@ -1,0 +1,96 @@
+﻿@model Business.Models.About.AboutHeader
+
+@{
+    ViewData["Title"] = "Edit About Header";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1 class="mb-4">Edit About Header</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="BreadcrumbHomeText" class="form-label"></label>
+                <input asp-for="BreadcrumbHomeText" class="form-control" />
+                <span asp-validation-for="BreadcrumbHomeText" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="BreadcrumbHomeUrl" class="form-label"></label>
+                <input asp-for="BreadcrumbHomeUrl" class="form-control" />
+                <span asp-validation-for="BreadcrumbHomeUrl" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="BreadcrumbCurrentText" class="form-label"></label>
+                <input asp-for="BreadcrumbCurrentText" class="form-control" />
+                <span asp-validation-for="BreadcrumbCurrentText" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="BreadcrumbCurrentUrl" class="form-label"></label>
+                <input asp-for="BreadcrumbCurrentUrl" class="form-control" />
+                <span asp-validation-for="BreadcrumbCurrentUrl" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Current Image</label><br />
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img id="currentImage" src="@Url.Content(Model.ImageUrl)" alt="Current Image" class="img-thumbnail mb-2" style="max-width: 250px;" />
+                }
+                else
+                {
+                    <p class="text-muted">No image uploaded yet.</p>
+                }
+            </div>
+
+            <div class="mb-3">
+                <label for="ImageFile" class="form-label">Upload New Image (optional)</label>
+                <input type="file" name="ImageFile" id="ImageFile" class="form-control" accept="image/*" onchange="previewImage(event)" />
+                <small class="form-text text-muted">Choose an image file to replace the current image.</small>
+                <img id="preview" class="img-thumbnail mt-2" style="max-width: 250px; display:none;" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function previewImage(event) {
+            var input = event.target;
+            var preview = document.getElementById('preview');
+            var current = document.getElementById('currentImage');
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    if (current) current.style.display = 'none';
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                preview.style.display = 'none';
+                if (current) current.style.display = 'block';
+            }
+        }
+    </script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

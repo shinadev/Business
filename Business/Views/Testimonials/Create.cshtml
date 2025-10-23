@@ -1,0 +1,72 @@
+﻿@model Business.Models.Testimonial.Testimonials
+
+@{
+    ViewData["Title"] = "Create Testimonial";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container mt-4">
+    <h2>Create Testimonial</h2>
+    <hr />
+
+    <form asp-action="Create" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="ClientName" class="form-label"></label>
+            <input asp-for="ClientName" class="form-control" />
+            <span asp-validation-for="ClientName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Profession" class="form-label"></label>
+            <input asp-for="Profession" class="form-control" />
+            <span asp-validation-for="Profession" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ImageFile" class="form-label">Upload Image</label>
+            <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" onchange="previewImage(event)" />
+            <span asp-validation-for="ImageFile" class="text-danger"></span>
+            <img id="imgPreview" src="#" class="img-thumbnail mt-2" style="max-width: 150px; display:none;" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Quote" class="form-label"></label>
+            <textarea asp-for="Quote" class="form-control" rows="4"></textarea>
+            <span asp-validation-for="Quote" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="TestimonialSectionId" class="form-label">Section</label>
+            <select asp-for="TestimonialSectionId" class="form-select" asp-items="ViewBag.Sections">
+                <option value="">-- Select Section --</option>
+            </select>
+            <span asp-validation-for="TestimonialSectionId" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </form>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script>
+        function previewImage(event) {
+            const preview = document.getElementById('imgPreview');
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = e => {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = '#';
+                preview.style.display = 'none';
+            }
+        }
+    </script>
+}

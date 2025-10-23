@@ -1,0 +1,80 @@
+﻿@model Business.Models.Menu.TopBarMenu
+
+@{
+    ViewData["Title"] = "Create Topbar Menu";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white">
+            <h4><i class="fas fa-plus-circle"></i> Create TopBar Menu</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Address" class="form-label">Address</label>
+                    <input asp-for="Address" class="form-control" placeholder="Enter address" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Phone" class="form-label">Phone</label>
+                    <input asp-for="Phone" class="form-control" placeholder="Enter phone number" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Email" class="form-label">Email</label>
+                    <input asp-for="Email" class="form-control" placeholder="Enter email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="TwitterUrl" class="form-label">Twitter URL</label>
+                    <input asp-for="TwitterUrl" class="form-control" placeholder="https://twitter.com/..." />
+                    <span asp-validation-for="TwitterUrl" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="FacebookUrl" class="form-label">Facebook URL</label>
+                    <input asp-for="FacebookUrl" class="form-control" placeholder="https://facebook.com/..." />
+                    <span asp-validation-for="FacebookUrl" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="LinkedInUrl" class="form-label">LinkedIn URL</label>
+                    <input asp-for="LinkedInUrl" class="form-control" placeholder="https://linkedin.com/..." />
+                    <span asp-validation-for="LinkedInUrl" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="InstagramUrl" class="form-label">Instagram URL</label>
+                    <input asp-for="InstagramUrl" class="form-control" placeholder="https://instagram.com/..." />
+                    <span asp-validation-for="InstagramUrl" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="YouTubeUrl" class="form-label">YouTube URL</label>
+                    <input asp-for="YouTubeUrl" class="form-control" placeholder="https://youtube.com/..." />
+                    <span asp-validation-for="YouTubeUrl" class="text-danger"></span>
+                </div>
+
+                <div class="form-group text-end">
+                    <button type="submit" class="btn btn-success px-4">
+                        <i class="fas fa-save"></i> Save
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

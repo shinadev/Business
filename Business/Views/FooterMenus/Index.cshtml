@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Business.Models.Menu.FooterMenu>
+
+@{
+    ViewData["Title"] = "Footer Menus";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container-fluid px-4">
+    <h2 class="mt-4 mb-4 text-primary">Footer Menu List</h2>
+
+    <div class="mb-3">
+        <a asp-action="Create" class="btn btn-success">
+            <i class="fas fa-plus"></i> Create New Footer Menu
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body table-responsive">
+            <table class="table table-bordered table-hover table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.First().AboutTitle)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().AboutContent)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Address)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Email)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Phone)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Copyright)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().AttributionText)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().AttributionUrl)</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.AboutTitle)</td>
+                            <td>@Html.DisplayFor(modelItem => item.AboutContent)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Copyright)</td>
+                            <td>@Html.DisplayFor(modelItem => item.AttributionText)</td>
+                            <td>@Html.DisplayFor(modelItem => item.AttributionUrl)</td>
+                            <td class="text-center">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary me-1">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info me-1">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete this item?');">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

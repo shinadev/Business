@@ -1,0 +1,61 @@
+﻿@model Business.Models.Service.ServiceItem
+
+@{
+    ViewData["Title"] = "Edit Service Item";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1 class="mb-4">Edit Service Item</h1>
+
+<h4 class="mb-3">Service Item Details</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" method="post" novalidate>
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="mb-3">
+                <label asp-for="IconClass" class="form-label"></label>
+                <input asp-for="IconClass" class="form-control" />
+                <span asp-validation-for="IconClass" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="LinkUrl" class="form-label"></label>
+                <input asp-for="LinkUrl" class="form-control" />
+                <span asp-validation-for="LinkUrl" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ServiceSectionId" class="form-label">Service Section</label>
+                <select asp-for="ServiceSectionId" class="form-select" asp-items="ViewBag.ServiceSectionId">
+                    <option value="">-- Select Section --</option>
+                </select>
+                <span asp-validation-for="ServiceSectionId" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

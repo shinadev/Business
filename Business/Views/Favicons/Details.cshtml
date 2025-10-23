@@ -1,0 +1,40 @@
+﻿@model Business.Models.Site.Favicon
+
+@{
+    ViewData["Title"] = "Favicon Details";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg rounded-3">
+        <div class="card-header bg-info text-white">
+            <h3 class="mb-0">🔍 Favicon Details</h3>
+        </div>
+        <div class="card-body">
+            <dl class="row mb-3">
+                <dt class="col-sm-2 fw-bold">Name</dt>
+                <dd class="col-sm-10">@Model.Name</dd>
+
+                <dt class="col-sm-2 fw-bold">Title</dt>
+                <dd class="col-sm-10">@Model.Title</dd>
+
+                <dt class="col-sm-2 fw-bold">Preview</dt>
+                <dd class="col-sm-10">
+                    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                    {
+                        <img src="@Model.ImageUrl" alt="@Model.Title" class="img-thumbnail shadow-sm" style="max-height:80px;" />
+                    }
+                    else
+                    {
+                        <span class="text-muted">No image available</span>
+                    }
+                </dd>
+            </dl>
+
+            <div class="d-flex gap-2">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Edit</a>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

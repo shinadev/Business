@@ -1,0 +1,89 @@
+﻿@model Business.Models.Page.DynamicPage
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1 class="mb-4">Edit Page</h1>
+
+<h4>DynamicPage</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Slug" class="form-label"></label>
+                <input asp-for="Slug" class="form-control" />
+                <span asp-validation-for="Slug" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Content" class="form-label"></label>
+                <textarea asp-for="Content" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="MetaDescription" class="form-label"></label>
+                <input asp-for="MetaDescription" class="form-control" />
+                <span asp-validation-for="MetaDescription" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="MetaKeywords" class="form-label"></label>
+                <input asp-for="MetaKeywords" class="form-control" />
+                <span asp-validation-for="MetaKeywords" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="PageStatusId" class="form-label"></label>
+                <select asp-for="PageStatusId" class="form-select" asp-items="ViewBag.PageStatusId"></select>
+                <span asp-validation-for="PageStatusId" class="text-danger"></span>
+            </div>
+
+            <div class="form-check mb-3">
+                <input class="form-check-input" asp-for="IsPublished" />
+                <label class="form-check-label" asp-for="IsPublished"></label>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CreatedAt" class="form-label"></label>
+                <input asp-for="CreatedAt" class="form-control" type="date" />
+                <span asp-validation-for="CreatedAt" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UpdatedAt" class="form-label"></label>
+                <input asp-for="UpdatedAt" class="form-control" type="date" />
+                <span asp-validation-for="UpdatedAt" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="PageCategoryId" class="form-label"></label>
+                <select asp-for="PageCategoryId" class="form-select" asp-items="ViewBag.PageCategoryId"></select>
+                <span asp-validation-for="PageCategoryId" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

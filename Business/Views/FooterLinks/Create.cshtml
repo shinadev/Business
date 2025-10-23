@@ -1,0 +1,56 @@
+﻿@model Business.Models.Menu.FooterLink
+
+@{
+    ViewData["Title"] = "Create Footer Link";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1 class="mb-4">Create New Footer Link</h1>
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <form asp-action="Create" novalidate>
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Title" class="form-label"></label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Url" class="form-label"></label>
+                        <input asp-for="Url" class="form-control" />
+                        <span asp-validation-for="Url" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="LinkType" class="form-label"></label>
+                        <select asp-for="LinkType" class="form-select"></select>
+                        <span asp-validation-for="LinkType" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="FooterMenuId" class="form-label"></label>
+                        <select asp-for="FooterMenuId" class="form-select" asp-items="ViewBag.FooterMenuId"></select>
+                        <span asp-validation-for="FooterMenuId" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Create</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-3 text-center">
+    <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

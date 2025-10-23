@@ -1,0 +1,32 @@
+﻿@model Business.Models.Menu.FooterLink
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1 class="mb-4">Footer Link Details</h1>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h4 class="card-title mb-3">FooterLink Info</h4>
+        <dl class="row">
+            <dt class="col-sm-3 fw-semibold">@Html.DisplayNameFor(model => model.Title)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Title)</dd>
+
+            <dt class="col-sm-3 fw-semibold">@Html.DisplayNameFor(model => model.Url)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Url)</dd>
+
+            <dt class="col-sm-3 fw-semibold">@Html.DisplayNameFor(model => model.LinkType)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.LinkType)</dd>
+
+            <dt class="col-sm-3 fw-semibold">@Html.DisplayNameFor(model => model.FooterMenu)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.FooterMenu.Id)</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="d-flex gap-3">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

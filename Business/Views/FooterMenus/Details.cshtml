@@ -1,0 +1,51 @@
+﻿@model Business.Models.Menu.FooterMenu
+
+@{
+    ViewData["Title"] = "Footer Menu Details";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Footer Menu Details</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-3">About Title</dt>
+                <dd class="col-sm-9">@Model.AboutTitle</dd>
+
+                <dt class="col-sm-3">About Content</dt>
+                <dd class="col-sm-9">@Model.AboutContent</dd>
+
+                <dt class="col-sm-3">Address</dt>
+                <dd class="col-sm-9">@Model.Address</dd>
+
+                <dt class="col-sm-3">Email</dt>
+                <dd class="col-sm-9">@Model.Email</dd>
+
+                <dt class="col-sm-3">Phone</dt>
+                <dd class="col-sm-9">@Model.Phone</dd>
+
+                <dt class="col-sm-3">Copyright</dt>
+                <dd class="col-sm-9">@Model.Copyright</dd>
+
+                <dt class="col-sm-3">Attribution Text</dt>
+                <dd class="col-sm-9">@Model.AttributionText</dd>
+
+                <dt class="col-sm-3">Attribution URL</dt>
+                <dd class="col-sm-9">
+                    <a href="@Model.AttributionUrl" target="_blank">@Model.AttributionUrl</a>
+                </dd>
+            </dl>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-sm">
+                <i class="bi bi-pencil-square"></i> Edit
+            </a>
+            <a asp-action="Index" class="btn btn-secondary btn-sm">
+                <i class="bi bi-arrow-left-circle"></i> Back to List
+            </a>
+        </div>
+    </div>
+</div>

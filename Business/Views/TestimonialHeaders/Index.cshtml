@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Business.Models.Testimonial.TestimonialHeader>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between mb-3">
+        <h2>Testimonial Headers</h2>
+        <a asp-action="Create" class="btn btn-success">Create New</a>
+    </div>
+
+    <table class="table table-striped table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Title</th>
+                <th>Breadcrumb Home Text</th>
+                <th>Breadcrumb Home URL</th>
+                <th>Breadcrumb Current Text</th>
+                <th>Breadcrumb Current URL</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.BreadcrumbHomeText</td>
+                    <td>@item.BreadcrumbHomeUrl</td>
+                    <td>@item.BreadcrumbCurrentText</td>
+                    <td>@item.BreadcrumbCurrentUrl</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.ImageUrl))
+                        {
+                            <img src="@item.ImageUrl" alt="Image" class="img-thumbnail" style="max-width:80px;" />
+                        }
+                        else
+                        {
+                            <span class="text-muted">No image</span>
+                        }
+                    </td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Edit</a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

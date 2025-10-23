@@ -1,0 +1,50 @@
+﻿@model Business.Models.Service.ServiceHeader
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1 class="mb-4">Delete Service Header</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+
+<div class="card p-4 mb-4">
+    <h4>Service Header Details</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Title)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Title)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.BreadcrumbHomeText)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.BreadcrumbHomeText)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.BreadcrumbHomeUrl)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.BreadcrumbHomeUrl)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.BreadcrumbCurrentText)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.BreadcrumbCurrentText)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.BreadcrumbCurrentUrl)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.BreadcrumbCurrentUrl)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.ImageUrl)</dt>
+        <dd class="col-sm-9">
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <img src="@Model.ImageUrl" alt="@Model.Title" style="max-height: 200px; border-radius: 5px;" />
+            }
+
+            else
+            {
+                <span>No image available</span>
+            }
+        </dd>
+    </dl>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+    </form>
+</div>

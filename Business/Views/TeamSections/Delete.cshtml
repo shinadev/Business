@@ -1,0 +1,18 @@
+﻿@model Business.Models.Team.TeamSection
+
+@{
+    ViewData["Title"] = "Delete Team Section";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1 class="mb-4 text-danger">Delete Team Section</h1>
+
+<div class="alert alert-warning">
+    Are you sure you want to delete the section "<strong>@Model.SectionTitle</strong>"? This will also remove all related team members.
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger me-2">Yes, Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

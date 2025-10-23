@@ -1,0 +1,59 @@
+﻿@model Business.Models.Menu.NavMenu
+
+@{
+    ViewData["Title"] = "Menu Details";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<div class="container-fluid mt-4">
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-info text-white">
+            <h4 class="mb-0">Menu Details</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Menu Name</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.MenuName)</dd>
+
+                <dt class="col-sm-3">Controller</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Controller)</dd>
+
+                <dt class="col-sm-3">Action</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Action)</dd>
+
+                <dt class="col-sm-3">Route ID</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.RouteId)</dd>
+
+                <dt class="col-sm-3">Route Slug</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.RouteSlug)</dd>
+
+                <dt class="col-sm-3">Dropdown Group</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.DropdownGroup)</dd>
+
+                <dt class="col-sm-3">Order</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Order)</dd>
+
+                <dt class="col-sm-3">Is Button</dt>
+                <dd class="col-sm-9">
+                    @if (Model.IsButton)
+                    {
+                        <span class="badge bg-success">Yes</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">No</span>
+                    }
+                </dd>
+            </dl>
+
+            <div class="mt-4 d-flex gap-2">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                    <i class="bi bi-pencil-square"></i> Edit
+                </a>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Back to List
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
