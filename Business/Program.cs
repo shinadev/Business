@@ -3,33 +3,33 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// 🧩 Add services to the container
 builder.Services.AddControllersWithViews();
 
+// 🗄️ Configure Database Context
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddDistributedMemoryCache();  // Cache for sessions
+// 💾 Add Session and Caching
+builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30);  // Session timeout
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
+    options.IdleTimeout = TimeSpan.FromMinutes(30);  // 30-minute timeout
+    options.Cookie.HttpOnly = true;                  // Prevent JS access
+    options.Cookie.IsEssential = true;               // Required for GDPR compliance
 });
-
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    db.Database.Migrate();
-}
-
-// Add Authentication if using Identity or custom auth
-// builder.Services.AddAuthentication(...);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// 🚀 Apply Database Migrations Automatically
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate();  // Ensures DB is created/updated
+}
+
+// 🌐 Configure the HTTP request pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -37,16 +37,15 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();  // Serve wwwroot files
+app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseSession();  // Enable session middleware
+app.UseSession();         // Enable session support
+app.UseAuthentication();  // Enable authentication if configured
+app.UseAuthorization();   // Enable authorization
 
-app.UseAuthentication();
-
-app.UseAuthorization();
-
+// 🧭 Default route
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
