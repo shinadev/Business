@@ -18,6 +18,12 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate();
+}
+
 // Add Authentication if using Identity or custom auth
 // builder.Services.AddAuthentication(...);
 
